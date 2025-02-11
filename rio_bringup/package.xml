@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rio_bringup</name>
+  <version>1.0.0</version>
+  <description>Rio bringup package</description>
+  <maintainer email="nagachaitanya948@gmail.com">chaitu</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rio_description</depend>
+  <depend>rio_simulation</depend>
+  <depend>rio_navigation</depend>
+  <depend>rio_interfaces</depend>
+  <depend>rio_teleop</depend>
+  <depend>rio_mapping</depend>
+  <depend>image_transport_plugins</depend>
+  <exec_depend>image_transport</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-aiohttp</exec_depend>
+  <exec_depend>python3-aiohttp-cors</exec_depend>
+  <exec_depend>python3-aiortc</exec_depend>
+  <exec_depend>ollama</exec_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

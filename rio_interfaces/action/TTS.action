@@ -1,0 +1,16 @@
+#goal definition
+string text
+bool voice_output
+string start_expression
+string end_expression
+bool expression_sound
+---
+#result definition
+bool success
+string expression
+---
+#feedback
+uint32 start_idx
+uint32 end_idx
+string word
+string expression

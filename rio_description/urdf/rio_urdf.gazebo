@@ -1,0 +1,202 @@
+<?xml version="1.0" ?>
+<robot name="rio" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <!-- Properties -->
+    <xacro:property name="silver" value="Gazebo/Silver" />
+    <xacro:property name="dark_grey" value="Gazebo/DarkGrey" />
+    <xacro:property name="orange" value="Gazebo/Orange" />
+    <xacro:property name="black" value="Gazebo/Black" />
+    <xacro:property name="r_name" value="rio" />
+    <!-- <gazebo>
+        <plugin name="control" filename="libgazebo_ros_control.so"/>
+    </gazebo> -->
+    <!-- Material and physics properties -->
+    <gazebo reference="base_footprint">
+        <material>${orange}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+        <gravity>true</gravity>
+    </gazebo>
+
+    <gazebo reference="top_plate">
+        <material>${orange}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="left_motor">
+        <material>${silver}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="right_motor">
+        <material>${silver}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="left_wheel">
+        <material>${dark_grey}</material>
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+    </gazebo>
+
+    <gazebo reference="right_wheel">
+        <material>${dark_grey}</material>
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+    </gazebo>
+    
+    <gazebo reference="caster_wheel">
+        <material>${silver}</material>
+        <mu1>0</mu1>
+        <mu2>0</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="lidar_base">
+        <material>${black}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="mobile_holder_support">
+        <material>${dark_grey}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="mobile_holder">
+        <material>${dark_grey}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="mobile">
+        <material>${black}</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <!-- Sensors -->
+    <!-- Front Camera -->
+    <gazebo reference="front_camera">
+        <material>${dark_grey}</material>
+        <sensor type="camera" name="front_camera">
+            <update_rate>30.0</update_rate>
+            <camera name="front_camera">
+                <horizontal_fov>1.089</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>8.0</far>
+                </clip>
+            </camera>
+            <plugin name="front_camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>30.0</updateRate>
+                <cameraName>front_camera</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>front_camera</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- Rear Camera -->
+    <gazebo reference="rear_camera">
+        <material>${dark_grey}</material>
+        <sensor type="camera" name="rear_camera">
+            <update_rate>30.0</update_rate>
+            <camera name="rear_camera">
+                <horizontal_fov>1.089</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>8.0</far>
+                </clip>
+            </camera>
+            <plugin name="rear_camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>30.0</updateRate>
+                <cameraName>rear_camera</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>rear_camera</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- Lidar -->
+    <gazebo reference="lidar">
+        <material>${black}</material>
+        <sensor type="ray" name="rp_lidar">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.15</min>
+                    <max>6</max>
+                    <resolution>0.01</resolution>
+                </range>
+            </ray>
+            <plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <remapping>~/out:=scan</remapping>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>lidar</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- Other components -->
+   
+ <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <updateRate>30</updateRate>
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            
+            <wheel_separation>0.165</wheel_separation>
+            <wheel_diameter>0.066</wheel_diameter>
+            
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+            <max_wheel_torque>20</max_wheel_torque>
+            
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>false</publish_wheel_tf>
+            
+            <odometry_topic>odom</odometry_topic> 
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+        </plugin>
+    </gazebo>
+</robot>

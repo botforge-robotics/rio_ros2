@@ -1,0 +1,716 @@
+<?xml version="1.0" ?>
+<robot name="rio" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rio_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rio_description)/urdf/rio_urdf.gazebo" /> 
+<xacro:include filename="$(find rio_description)/urdf/rio_urdf.trans" />
+
+ <link name="base_footprint"/>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.012841619475506487 -0.0024599411978563066 0.029157085775741845" rpy="0 0 0"/>
+    <mass value="0.15997901035243256"/>
+    <inertia ixx="0.000192" iyy="0.000142" izz="0.000305" ixy="-0.0" iyz="0.0" ixz="-6e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="orange"/>
+  </visual>`
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_motor">
+  <inertial>
+    <origin xyz="-8.563833074584637e-06 -0.026291068396203023 1.2855401507270992e-05" rpy="0 0 0"/>
+    <mass value="0.04331010499608669"/>
+    <inertia ixx="1.3e-05" iyy="2e-06" izz="1.2e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.049266 -0.059542 -0.035119" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_motor.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.049266 -0.059542 -0.035119" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_motor.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_motor">
+  <inertial>
+    <origin xyz="-9.768637060050822e-06 0.026291078485862346 -1.3158908313271045e-05" rpy="0 0 0"/>
+    <mass value="0.04331010499608669"/>
+    <inertia ixx="1.3e-05" iyy="2e-06" izz="1.2e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.049619 0.064457 -0.035181" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_motor.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.049619 0.064457 -0.035181" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_motor.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_1">
+  <inertial>
+    <origin xyz="-5.469520101199221e-06 8.607998500477498e-06 0.016938440556213928" rpy="0 0 0"/>
+    <mass value="0.005973329265393257"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.062373 -0.030036 -0.021628" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.062373 -0.030036 -0.021628" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_2">
+  <inertial>
+    <origin xyz="-5.546191451162585e-06 8.616226618150813e-06 0.01693808954214527" rpy="0 0 0"/>
+    <mass value="0.005973329265393257"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.062375 0.034964 -0.021661" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.062375 0.034964 -0.021661" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_4">
+  <inertial>
+    <origin xyz="-5.907329962008545e-06 8.229157726011294e-06 0.016938047126473565" rpy="0 0 0"/>
+    <mass value="0.005973329265393246"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051127 -0.045033 -0.021584" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051127 -0.045033 -0.021584" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_3">
+  <inertial>
+    <origin xyz="-5.0963111663110405e-06 8.241183437611432e-06 0.016938764875142214" rpy="0 0 0"/>
+    <mass value="0.0059733292653932355"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051125 0.049967 -0.021631" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051125 0.049967 -0.021631" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="top_plate">
+  <inertial>
+    <origin xyz="-0.06379308827412475 -0.032930320479787625 0.0034898885321950138" rpy="0 0 0"/>
+    <mass value="0.06523902073566723"/>
+    <inertia ixx="0.000108" iyy="0.00012" izz="0.000228" ixy="1e-06" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.062363 -0.030051 -0.051628" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/top_plate.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="orange"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.062363 -0.030051 -0.051628" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/top_plate.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="mobile_holder_support">
+  <inertial>
+    <origin xyz="0.014835803729750581 -0.033474184731820504 0.049957963841752655" rpy="0 0 0"/>
+    <mass value="0.03989681924895345"/>
+    <inertia ixx="0.000119" iyy="6e-05" izz="8.1e-05" ixy="-0.0" iyz="0.0" ixz="-1.8e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.034637 -0.031049 -0.053596" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile_holder_support.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.034637 -0.031049 -0.053596" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile_holder_support.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_base">
+  <inertial>
+    <origin xyz="-0.025545342222533934 -0.01989487550646769 0.024780580332565187" rpy="0 0 0"/>
+    <mass value="0.0546760353467797"/>
+    <inertia ixx="1.7e-05" iyy="4.3e-05" izz="5.4e-05" ixy="0.0" iyz="-0.0" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.068362 -0.017554 -0.056636" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/lidar_base.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="light_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.068362 -0.017554 -0.056636" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/lidar_base.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_15">
+  <inertial>
+    <origin xyz="2.323773308533783e-06 -3.5580451613476116e-06 -0.006651592554786562" rpy="0 0 0"/>
+    <mass value="0.00305708277535035"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051662 -0.012524 -0.0536" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_15.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051662 -0.012524 -0.0536" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_15.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_16">
+  <inertial>
+    <origin xyz="2.209983970553886e-06 -3.5542538967467396e-06 -0.006651548906653516" rpy="0 0 0"/>
+    <mass value="0.0030570827753503478"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051661 0.017426 -0.053615" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_16.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051661 0.017426 -0.053615" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_16.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_12">
+  <inertial>
+    <origin xyz="2.3250468180885386e-06 -3.270624547555695e-06 -0.006651370301117142" rpy="0 0 0"/>
+    <mass value="0.0030570827753503456"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.075612 -0.012523 -0.053592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_12.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.075612 -0.012523 -0.053592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_12.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hex_spacer_14">
+  <inertial>
+    <origin xyz="2.2112574799698637e-06 -3.266833282979109e-06 -0.0066513266529838605" rpy="0 0 0"/>
+    <mass value="0.003057082775350348"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.075611 0.017427 -0.053607" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_14.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.075611 0.017427 -0.053607" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/hex_spacer_14.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="pcb">
+  <inertial>
+    <origin xyz="0.021982212582820918 -0.032480726344707986 0.009613406334497573" rpy="0 0 0"/>
+    <mass value="0.01609453628044871"/>
+    <inertia ixx="9e-06" iyy="4e-06" izz="1.2e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.059638 -0.03055 -0.056588" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/pcb.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.059638 -0.03055 -0.056588" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/pcb.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_wheel">
+  <inertial>
+    <origin xyz="0.004990925877038352 -0.015156676161887853 -0.014433228402674324" rpy="0 0 0"/>
+    <mass value="0.021175857227502145"/>
+    <inertia ixx="3e-06" iyy="4e-06" izz="3e-06" ixy="-0.0" iyz="-0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.075607 -0.012516 -0.038592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/caster_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.075607 -0.012516 -0.038592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/caster_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_led">
+  <inertial>
+    <origin xyz="-0.004490618941914326 0.0040532406812327434 -0.0037842632684768687" rpy="0 0 0"/>
+    <mass value="0.0009706712716192733"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051138 -0.045049 -0.053584" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_led.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051138 -0.045049 -0.053584" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_led.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_led">
+  <inertial>
+    <origin xyz="-0.004490567047755474 -0.004087267999626706 -0.0037794566001202734" rpy="0 0 0"/>
+    <mass value="0.0009706712716192871"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.051135 0.049951 -0.053631" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_led.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.051135 0.049951 -0.053631" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_led.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ball_joint">
+  <inertial>
+    <origin xyz="-0.0050804229266726755 -0.0004314480428243652 0.006504774090637322" rpy="0 0 0"/>
+    <mass value="0.024597840907518598"/>
+    <inertia ixx="3e-06" iyy="5e-06" izz="3e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.003664 0.002407 -0.139623" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/ball_joint.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.003664 0.002407 -0.139623" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/ball_joint.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_camera">
+  <inertial>
+    <origin xyz="0.0002501245374304725 -1.7339799740362372e-06 7.595321338815797e-07" rpy="0 0 0"/>
+    <mass value="1.9266798695844855e-05"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.040353 0.076767 -0.162388" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/front_camera.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.040353 0.076767 -0.162388" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/front_camera.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_camera">
+  <inertial>
+    <origin xyz="-0.00010029880411212277 1.0834410937715644e-06 -5.649213598857283e-07" rpy="0 0 0"/>
+    <mass value="0.00014650165458053333"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.030974 0.070128 -0.188824" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/rear_camera.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.030974 0.070128 -0.188824" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/rear_camera.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel">
+  <inertial>
+    <origin xyz="-3.58214571040405e-07 0.015600101307069583 -7.774594619064379e-06" rpy="0 0 0"/>
+    <mass value="0.028772163087383975"/>
+    <inertia ixx="1.2e-05" iyy="1.9e-05" izz="1.2e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.049266 -0.062542 -0.035117" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.049266 -0.062542 -0.035117" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel">
+  <inertial>
+    <origin xyz="2.1660126581224404e-08 -0.015600092927786899 7.267299979608899e-06" rpy="0 0 0"/>
+    <mass value="0.028772158225879568"/>
+    <inertia ixx="1.2e-05" iyy="1.9e-05" izz="1.2e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.04962 0.067457 -0.035183" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.04962 0.067457 -0.035183" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar">
+  <inertial>
+    <origin xyz="0.0012533828906253174 0.0009564333168775947 0.010802307869423794" rpy="0 0 0"/>
+    <mass value="0.0226912412006433"/>
+    <inertia ixx="9e-06" iyy="6e-06" izz="1.4e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.026197 0.002102 -0.102132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="light_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.026197 0.002102 -0.102132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="mobile">
+  <inertial>
+    <origin xyz="0.00392491734966674 -0.0005291170124254365 -0.007306348123643558" rpy="0 0 0"/>
+    <mass value="0.10346371168307199"/>
+    <inertia ixx="0.000268" iyy="5.2e-05" izz="0.000217" ixy="-2e-06" iyz="1e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.033063 0.0027 -0.16985" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="light_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.033063 0.0027 -0.16985" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="mobile_holder">
+  <inertial>
+    <origin xyz="0.033228701295913106 -0.00027687767923910856 0.0054736934791966285" rpy="0 0 0"/>
+    <mass value="0.03511681975797342"/>
+    <inertia ixx="4.3e-05" iyy="4.5e-05" izz="6e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.003672 0.002395 -0.161801" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile_holder.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.003672 0.002395 -0.161801" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rio_description)/meshes/mobile_holder.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+ <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0 0 0.010" rpy="0 0 0"/>
+  </joint>
+  
+<joint name="Rigid_348" type="fixed">
+  <origin xyz="0.049266 0.059542 0.035119" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="left_motor"/>
+</joint>
+
+<joint name="Rigid_349" type="fixed">
+  <origin xyz="0.049619 -0.064457 0.035181" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="right_motor"/>
+</joint>
+
+<joint name="Rigid_350" type="fixed">
+  <origin xyz="0.062373 0.030036 0.021628" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="hex_spacer_1"/>
+</joint>
+
+<joint name="Rigid_351" type="fixed">
+  <origin xyz="0.062375 -0.034964 0.021661" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="hex_spacer_2"/>
+</joint>
+
+<joint name="Rigid_352" type="fixed">
+  <origin xyz="-0.051127 0.045033 0.021584" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="hex_spacer_4"/>
+</joint>
+
+<joint name="Rigid_353" type="fixed">
+  <origin xyz="-0.051125 -0.049967 0.021631" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="hex_spacer_3"/>
+</joint>
+
+<joint name="Rigid_354" type="fixed">
+  <origin xyz="-1e-05 1.5e-05 0.03" rpy="0 0 0"/>
+  <parent link="hex_spacer_1"/>
+  <child link="top_plate"/>
+</joint>
+
+<joint name="Rigid_355" type="fixed">
+  <origin xyz="-0.097 0.000998 0.001968" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="mobile_holder_support"/>
+</joint>
+
+<joint name="Rigid_356" type="fixed">
+  <origin xyz="0.005999 -0.012497 0.005008" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="lidar_base"/>
+</joint>
+
+<joint name="Rigid_357" type="fixed">
+  <origin xyz="-0.114025 -0.017527 0.001972" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="hex_spacer_15"/>
+</joint>
+
+<joint name="Rigid_358" type="fixed">
+  <origin xyz="-0.114024 -0.047477 0.001987" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="hex_spacer_16"/>
+</joint>
+
+<joint name="Rigid_359" type="fixed">
+  <origin xyz="-0.137975 -0.017528 0.001964" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="hex_spacer_12"/>
+</joint>
+
+<joint name="Rigid_360" type="fixed">
+  <origin xyz="-0.137974 -0.047478 0.001979" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="hex_spacer_14"/>
+</joint>
+
+<joint name="Rigid_361" type="fixed">
+  <origin xyz="-0.122001 0.000499 0.00496" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="pcb"/>
+</joint>
+
+<joint name="Rigid_362" type="fixed">
+  <origin xyz="5e-06 -7e-06 -0.016" rpy="0 0 0"/>
+  <parent link="hex_spacer_12"/>
+  <child link="caster_wheel"/>
+</joint>
+
+<joint name="Rigid_363" type="fixed">
+  <origin xyz="-0.113501 0.014998 0.001956" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="left_led"/>
+</joint>
+
+<joint name="Rigid_364" type="fixed">
+  <origin xyz="-0.113498 -0.080002 0.002003" rpy="0 0 0"/>
+  <parent link="top_plate"/>
+  <child link="right_led"/>
+</joint>
+
+<joint name="Slider_365" type="prismatic">
+  <origin xyz="0.030973 -0.033456 0.086027" rpy="0 0 0"/>
+  <parent link="mobile_holder_support"/>
+  <child link="ball_joint"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="front_camera_joint" type="fixed">
+  <origin xyz="0.00729 -0.074067 -0.007462" rpy="0 0 0"/>
+  <parent link="mobile"/>
+  <child link="front_camera"/>
+</joint>
+
+<joint name="rear_camera_joint" type="fixed">
+  <origin xyz="-0.002089 -0.067428 0.018974" rpy="0 3.142 0"/>
+  <parent link="mobile"/>
+  <child link="rear_camera"/>
+</joint>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="0.0 0.003 0.0" rpy="0 0 0"/>
+  <parent link="left_motor"/>
+  <child link="left_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="0.0 -0.003 0.0" rpy="0 0 0"/>
+  <parent link="right_motor"/>
+  <child link="right_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="-0.042165 -0.019656 0.045496" rpy="0 0 0"/>
+  <parent link="lidar_base"/>
+  <child link="lidar"/>
+</joint>
+
+<joint name="Rigid_374" type="fixed">
+  <origin xyz="0.036735 -0.000305 0.008049" rpy="0 0 0"/>
+  <parent link="mobile_holder"/>
+  <child link="mobile"/>
+</joint>
+
+<joint name="Rigid_375" type="fixed">
+  <origin xyz="-8e-06 1.2e-05 0.022178" rpy="0 -0.5 0"/>
+  <parent link="ball_joint"/>
+  <child link="mobile_holder"/>
+</joint>
+
+</robot>

@@ -1,0 +1,18 @@
+joy_node:
+  ros__parameters:
+    dev: "/dev/input/js0"
+    deadzone: 0.05
+    autorepeat_rate: 20.0
+    coalesce_interval: 0.001
+
+teleop_node:
+  ros__parameters:
+    axis_linear:
+      x: 1
+    scale_linear:
+      x: 0.5
+    axis_angular:
+      yaw: 0
+    scale_angular:
+      yaw: 1.5
+    enable_button: 0 # Usually the trigger button
