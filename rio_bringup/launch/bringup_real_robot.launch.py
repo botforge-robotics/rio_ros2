@@ -1,8 +1,8 @@
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess
-from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, PythonLaunchDescriptionSource
 import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
@@ -66,6 +66,21 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Add WebRTC and Ollama includes
+    webrtc_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            get_package_share_directory('rio_bringup'),
+            '/launch/webrtc.launch.py'
+        ])
+    )
+    
+    ollama_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            get_package_share_directory('rio_bringup'),
+            '/launch/ollama_nlp.launch.py'
+        ])
+    )
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -77,6 +92,8 @@ def generate_launch_description():
             default_value='8888',
             description='Port for micro-ROS agent'
         ),
+        webrtc_launch,
+        ollama_launch,
         micro_ros_agent,
         odom_tf_broadcaster_node,
         robot_state_publisher_node,
