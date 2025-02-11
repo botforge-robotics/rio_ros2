@@ -14,13 +14,9 @@
   <depend>rio_interfaces</depend>
   <depend>rio_teleop</depend>
   <depend>rio_mapping</depend>
+  <depend>rosbridge_server</depend>
   <depend>image_transport_plugins</depend>
   <exec_depend>image_transport</exec_depend>
-  <exec_depend>python3-opencv</exec_depend>
-  <exec_depend>python3-aiohttp</exec_depend>
-  <exec_depend>python3-aiohttp-cors</exec_depend>
-  <exec_depend>python3-aiortc</exec_depend>
-  <exec_depend>ollama</exec_depend>
   <export>
     <build_type>ament_python</build_type>
   </export>

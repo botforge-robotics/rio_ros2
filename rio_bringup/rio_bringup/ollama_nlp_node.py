@@ -10,6 +10,7 @@ from nav2_msgs.action import NavigateToPose
 from rio_interfaces.action import TTS
 from ament_index_python.packages import get_package_share_directory
 import os
+from action_msgs.msg import GoalStatus
 
 class OllamaNLPNode(Node):
     def __init__(self):
@@ -82,9 +83,14 @@ class OllamaNLPNode(Node):
             return {}
 
     def _initialize_system_prompt(self):
-        """Format system prompt with actual locations"""
+        """Format system prompt with actual locations and expressions"""
         location_list = ", ".join(self.nav_locations.keys()) if self.nav_locations else "None configured"
-        self.system_prompt = self.system_prompt.format(locations=location_list)
+        expressions_list = "speaking, curious, afraid, blush, angry, sad, happy, surprise"
+        
+        self.system_prompt = self.system_prompt.format(
+            locations=location_list,
+            expressions_list=expressions_list
+        )
         self.message_history.append({'role': 'system', 'content': self.system_prompt})
 
     def listener_callback(self, msg):
@@ -121,28 +127,31 @@ class OllamaNLPNode(Node):
         """Parse and execute the AI's response"""
         self.get_logger().info(f"Raw AI Response: '{response}'")
         
-        # Updated regex pattern to handle spaces in command format
-        nav_match = re.match(r'\[navigate\]\s*\[(\w+)\]\s*(\w+)', response)
-        if nav_match:
-            self.get_logger().info(f"Nav match groups: {nav_match.groups()}")
-            self._handle_navigation_command(nav_match)
-            return
-            
-        # Existing expression/text handling remains the same
-        expr_match = re.match(r'\[(\w+)\](.+)', response)
+        # Check each line separately for commands
+        for line in response.split('\n'):
+            line = line.strip()
+            # Handle navigation commands (with bracketed location and optional text)
+            nav_match = re.match(r'^\[navigate\]\s+\[(\w+)\]\s+\[(\w+)\](?:\s+(.*))?$', line)
+            if nav_match:
+                expression, location, response_text = nav_match.groups()
+                self._handle_navigation_command(nav_match)
+                return  # Process only first valid command
+                
+        # Handle normal responses if no command found
+        expr_match = re.search(r'^\[(\w+)\](.+)', response, re.DOTALL)
         if expr_match:
             expression, text = expr_match.groups()
         else:
             expression, text = 'idle', response
             
-        self.get_logger().info(f"Expression: {expression}, Text: {text}")
         self._send_tts(text.strip(), expression.lower())
-        
+
     def _handle_navigation_command(self, match):
         """Execute navigation command"""
         expression = match.group(1).lower()
         location = match.group(2).lower()
-        
+        response_text = match.group(3)  # Capture the response text
+
         self.get_logger().info(f"Attempting navigation to: {location}")  # Debug 4
         
         if location not in self.nav_locations:
@@ -154,7 +163,11 @@ class OllamaNLPNode(Node):
         if self._validate_coordinates(coords):
             self.get_logger().info(f"Sending goal to {location} with coords: {coords}")  # Debug 6
             self._send_navigation_goal(coords, location)
-            self._send_tts(f"Going to {location.replace('_', ' ')}", expression)
+            # Use the response text from the AI's response
+            if response_text:
+                self._send_tts(response_text.strip(), expression)
+            else:
+                self._send_tts(f"Going to {location.replace('_', ' ')}", expression)
         else:
             self.get_logger().error(f"Invalid coordinates for {location}: {coords}")  # Debug 7
 
@@ -193,12 +206,12 @@ class OllamaNLPNode(Node):
 
     def _nav_result(self, future):
         """Handle navigation result"""
-        result = future.result()  # Get the result object directly
+        result = future.result()
 
-        if result.success:  # Use `success` instead of `result.result`
+        if result.status == GoalStatus.STATUS_SUCCEEDED:
             self._send_tts("Arrived at destination!", 'happy')
-        else:
-            self._send_tts("Navigation failed", 'sad')
+        # else:
+        #     self._send_tts("Navigation failed", 'sad')
 
     def _nav_feedback(self, feedback):
         """Handle navigation progress updates"""
