@@ -224,8 +224,8 @@ class OllamaNLPNode(Node):
         if expression not in self.expression_map:
             expression = 'idle'
             
-        # Clean text
-        clean_text = re.sub(r'[^\w\s,.!?\-\']', '', text, flags=re.UNICODE)
+        # Remove emojis but keep special characters
+        clean_text = re.sub(r'[^\w\s,.!?+\-*/=]', '', text, flags=re.UNICODE)
         clean_text = re.sub(r'\s+', ' ', clean_text).strip()
         
         if not clean_text:

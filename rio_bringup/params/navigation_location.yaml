@@ -1,13 +1,21 @@
 locations:
+  # kitchen:
+  #   x: -6.7
+  #   y: 4.8 
+  #   theta: 0.5
+  # living_room:
+  #   x: 0.0
+  #   y: 0.0
+  #   theta: 1.0
+  # bedroom:
+  #   x: 5.5
+  #   y: -5.5
+  #   theta: 1.0
   kitchen:
     x: -6.7
     y: 4.8 
     theta: 0.5
-  living_room:
-    x: 0.0
-    y: 0.0
-    theta: 1.0
   bedroom:
-    x: 5.5
-    y: -5.5
+    x: 0
+    y: 0
     theta: 1.0
