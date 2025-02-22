@@ -30,7 +30,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file',
-            default_value='nav2_sim_params.yaml',
+            default_value='nav2_real_params.yaml',
             description='Full path to param file to load'
         ),
 
