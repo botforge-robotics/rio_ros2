@@ -1,9 +1,8 @@
-import os
 from launch_ros.actions import Node
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
-import xacro
+
 
 
 def generate_launch_description():
@@ -40,11 +39,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='false',
-            description='Use simulation (Gazebo) clock if true'
-        ),
         DeclareLaunchArgument(
             'agent_port',
             default_value='8888',

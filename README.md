@@ -250,3 +250,126 @@ ros2 launch rio_simulation rviz.launch.py \
 |-----------|-------------|---------------|---------|
 | `rviz_config` | RViz config file | `default.rviz` | Any .rviz config |
 
+## 📡 RIO Interfaces
+
+### Topics
+
+#### Publishers (Mobile App → ROS2)
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/battery` | `sensor_msgs/BatteryState` | Battery status information |
+| `/expression` | `std_msgs/String` | Current facial expression |
+| `/gps` | `sensor_msgs/NavSatFix` | GPS location data |
+| `/imu/data` | `sensor_msgs/Imu` | Raw IMU data (accelerometer, gyroscope) |
+| `/imu/mag` | `sensor_msgs/MagneticField` | Magnetometer readings |
+| `/imu/orientation` | `geometry_msgs/Quaternion` | Device orientation in quaternions |
+| `/imu/absolute_orientation` | `geometry_msgs/Quaternion` | Absolute orientation with magnetic reference |
+| `/imu/heading` | `std_msgs/Float32` | Heading angle in degrees |
+| `/imu/linear_acceleration` | `geometry_msgs/Vector3` | Linear acceleration without gravity |
+| `/illuminance` | `sensor_msgs/Illuminance` | Ambient light sensor readings |
+| `/speech_recognition/result` | `std_msgs/String` | Recognized speech text |
+| `/speech_recognition/status` | `std_msgs/String` | Recognition system status |
+| `/speech_recognition/hotword_detected` | `std_msgs/Bool` | Wake word detection |
+
+#### Publishers (PCB → ROS2)
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/scan` | `sensor_msgs/LaserScan` | LIDAR scan data |
+| `/sonar` | `sensor_msgs/Range` | Ultrasonic sensor range data |
+| `/odom` | `nav_msgs/Odometry` | Robot odometry data |
+
+#### Subscribers (Mobile App ← ROS2)
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/torch` | `std_msgs/Bool` | Flashlight control |
+
+#### Subscribers (PCB ← ROS2)
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/cmd_vel` | `geometry_msgs/Twist` | Robot velocity commands |
+| `/servoA` | `std_msgs/Int16` | Servo A position control (0-180°) |
+| `/servoB` | `std_msgs/Int16` | Servo B position control (0-180°) |
+| `/left_led` | `std_msgs/ColorRGBA` | Left LED RGBA control |
+| `/right_led` | `std_msgs/ColorRGBA` | Right LED RGBA control |
+
+### Actions
+
+#### Text-to-Speech (`/tts`)
+- **Type**: `rio_interfaces/action/TTS`
+- **Description**: Converts text to speech with facial expressions
+- **Usage**:
+  ```bash
+  # Send goal
+  ros2 action send_goal /tts rio_interfaces/action/TTS \
+    "{text: 'Hello, how are you?', voice_output: true, start_expression: 'happy', end_expression: 'neutral', expression_sound: false}"
+  ```
+
+#### SMS Sending (`/sms`)
+- **Type**: `rio_interfaces/action/Sms`
+- **Description**: Send SMS messages using phone's cellular network
+- **Usage**:
+  ```bash
+  # Send goal
+  ros2 action send_goal /sms rio_interfaces/action/Sms \
+    "{number: 1234567890, message: 'Hello from RIO!', sim_slot: 0}"
+  ```
+
+#### Authentication (`/auth`)
+- **Type**: `rio_interfaces/action/Auth`
+- **Description**: Authenticate using phone's biometric sensors
+- **Usage**:
+  ```bash
+  # Send goal
+  ros2 action send_goal /auth rio_interfaces/action/Auth \
+    "{message: 'Please authenticate to continue'}"
+  ```
+
+### Services
+
+#### Camera Control (`/enable_camera`)
+- **Type**: `rio_interfaces/srv/Camera`
+- **Description**: Control phone's front/back cameras
+- **Usage**:
+  ```bash
+  # Enable front camera
+  ros2 service call /enable_camera rio_interfaces/srv/Camera \
+    "{direction: 0, status: true}"
+
+  # Enable back camera
+  ros2 service call /enable_camera rio_interfaces/srv/Camera \
+    "{direction: 1, status: true}"
+
+  # Disable camera
+  ros2 service call /enable_camera rio_interfaces/srv/Camera \
+    "{direction: 0, status: false}"
+  ```
+- **Parameters**:
+  - `direction`: 0 (front) or 1 (back)
+  - `status`: true (enable) or false (disable)
+
+#### Expression Management
+##### Set Expression (`/set_expression`)
+- **Type**: `rio_interfaces/srv/Expression`
+- **Description**: Set robot's facial expression
+- **Usage**:
+  ```bash
+  # Set happy expression with sound
+  ros2 service call /set_expression rio_interfaces/srv/Expression \
+    "{expression: 'happy', expression_sound: true}"
+
+  # Set neutral expression without sound
+  ros2 service call /set_expression rio_interfaces/srv/Expression \
+    "{expression: 'neutral', expression_sound: false}"
+  ```
+
+##### Get Expression Status (`/expression_status`)
+- **Type**: `rio_interfaces/srv/GetExpression`
+- **Description**: Get current facial expression
+- **Usage**:
+  ```bash
+  # Get current expression
+  ros2 service call /expression_status rio_interfaces/srv/GetExpression "{}"
+  ```
+
+> **Note**: All examples use command-line interface. For programmatic usage, refer to the [rio_interfaces](https://github.com/botforge-robotics/rio_interfaces) package documentation.
+

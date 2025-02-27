@@ -1,7 +1,7 @@
 import os
 from launch_ros.actions import Node
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 import xacro
@@ -33,36 +33,6 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         parameters=[{'use_sim_time': use_sim_time_value}, {'rate': 100}],
-        output='screen'
-    )
-
-    odom_tf_broadcaster_node = Node(
-        package='rio_bringup',
-        executable='odom_tf_broadcaster',
-        name='odom_tf_broadcaster_node',
-        output='screen'
-    )
-
-    # Add micro-ROS agent
-    micro_ros_agent = ExecuteProcess(
-        cmd=['ros2', 'run', 'micro_ros_agent',
-             'micro_ros_agent', 'udp4', '--port', agent_port_value],
-        output='screen'
-    )
-
-    # Add LIDAR UDP node
-    lidar_udp_node = Node(
-        package='rio_bringup',
-        executable='lidar_udp_node',
-        name='lidar_udp_node',
-        parameters=[{
-            'udp_port': 9999,
-            'frame_id': 'lidar',
-            'angle_min': -3.14159,  # -180 degrees
-            'angle_max': 3.14159,   # 180 degrees
-            'range_min': 0.15,
-            'range_max': 6.0
-        }],
         output='screen'
     )
 
@@ -102,10 +72,7 @@ def generate_launch_description():
             description='Port for micro-ROS agent'
         ),
         mobile_nodes_launch,  # Include mobile nodes
-        pcb_nodes_launch,      # Include PCB nodes
-        micro_ros_agent,
-        odom_tf_broadcaster_node,
+        pcb_nodes_launch,  
         robot_state_publisher_node,
         joint_state_publisher_node,
-        lidar_udp_node,
     ])
