@@ -268,8 +268,8 @@ ros2 launch rio_simulation rviz.launch.py \
 | `/imu/linear_acceleration` | `geometry_msgs/Vector3` | Linear acceleration without gravity |
 | `/illuminance` | `sensor_msgs/Illuminance` | Ambient light sensor readings |
 | `/speech_recognition/result` | `std_msgs/String` | Recognized speech text |
-| `/speech_recognition/status` | `std_msgs/String` | Recognition system status |
-| `/speech_recognition/hotword_detected` | `std_msgs/Bool` | Wake word detection |
+| `/speech_recognition/status` | `std_msgs/String` | Speech Recognition system status ("listening", "done") |
+| `/speech_recognition/hotword_detected` | `std_msgs/Empty` | Wake word detection |
 
 #### Publishers (PCB → ROS2)
 | Topic | Type | Description |
@@ -351,6 +351,22 @@ ros2 launch rio_simulation rviz.launch.py \
 ##### Set Expression (`/set_expression`)
 - **Type**: `rio_interfaces/srv/Expression`
 - **Description**: Set robot's facial expression
+- **Available Expressions**:
+  | Expression | Description |
+  |------------|-------------|
+  | `idle` | Default neutral state |
+  | `listening` | Active listening mode |
+  | `thinking` | Processing or computing |
+  | `speaking` | Talking animation |
+  | `curious` | Shows interest or curiosity |
+  | `afraid` | Displays fear or concern |
+  | `blush` | Embarrassed or shy |
+  | `angry` | Shows frustration or anger |
+  | `sad` | Displays sadness |
+  | `happy` | Shows joy or pleasure |
+  | `surprise` | Displays astonishment |
+  | `sleep` | Power saving mode |
+  | `wakeup` | Activation animation |
 - **Usage**:
   ```bash
   # Set happy expression with sound
@@ -360,6 +376,10 @@ ros2 launch rio_simulation rviz.launch.py \
   # Set neutral expression without sound
   ros2 service call /set_expression rio_interfaces/srv/Expression \
     "{expression: 'neutral', expression_sound: false}"
+
+  # Set thinking expression with sound
+  ros2 service call /set_expression rio_interfaces/srv/Expression \
+    "{expression: 'thinking', expression_sound: true}"
   ```
 
 ##### Get Expression Status (`/expression_status`)
