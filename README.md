@@ -1,9 +1,17 @@
+<p align="center">
+    <img src="https://img.shields.io/badge/🚀%20COMING%20SOON-brightgreen?style=for-the-badge" width="300" alt="Coming Soon"/>
+</p>
 <div align="center">
-    <img src="https://img.shields.io/github/stars/botforge-robotics/rio_ros2?style=social&logo=github" alt="Stars">&nbsp;
-    <img src="https://img.shields.io/github/forks/botforge-robotics/rio_ros2?style=social&logo=github" alt="Forks">&nbsp;
-    <img src="https://img.shields.io/github/issues/botforge-robotics/rio_ros2" alt="Issues">&nbsp;
-    <img src="https://img.shields.io/github/repo-size/botforge-robotics/rio_ros2" alt="Repo Size">&nbsp;
-    <img src="https://img.shields.io/github/license/botforge-robotics/rio_ros2?color=mit" alt="MIT License">
+    <img src="https://img.shields.io/badge/ROS2-Iron-blue" alt="ROS2"/>
+    <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status"/>
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License"/>
+    <img src="https://img.shields.io/badge/platform-Ubuntu%2022.04-orange" alt="Platform"/>
+    <img src="https://img.shields.io/badge/Hardware-v1.2-red" alt="Hardware"/>
+    <img src="https://img.shields.io/badge/Mobile%20App-Android-green" alt="Mobile App"/>
+    <img src="https://img.shields.io/github/stars/botforge-robotics/rio_ros2?style=social" alt="Stars"/>
+    <img src="https://img.shields.io/github/forks/botforge-robotics/rio_ros2" alt="Forks"/>
+    <img src="https://img.shields.io/github/issues/botforge-robotics/rio_ros2" alt="Issues"/>
+    <img src="https://img.shields.io/github/repo-size/botforge-robotics/rio_ros2" alt="Repo Size"/>
 </div>
 
 <!-- Start of Selection -->
@@ -68,19 +76,16 @@
 
 ## ⚙️ Requirements
 
+### Hardware Requirements
+
+- [Assembled RIO Robot with Control PCB](https://github.com/botforge-robotics/rio_hardware) (BOM, assembly and firmware flashing.)
+- Android Smartphone
+
 ### Software Requirements
 
 - [ROS 2 Iron Irwini](https://docs.ros.org/en/iron/Installation.html) (Recommended)
 - [Ollama Installation](https://ollama.ai/download) (Local LLM Execution)
-- [VSCode + PlatformIO](https://platformio.org/install/ide?install=vscode) (Firmware Flashing)
-- [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) (Android 10+)
-- [Rio Firmware](https://github.com/botforge-robotics/rio_firmware) (Flash RIO Pcb with this firmware)
-
-### Hardware Requirements
-
-- Assembled RIO Robot with Control PCB
-- Smartphone with RIO App.
-- PC with ROS2 Installed
+- [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) (Coming Soon on Play Store)
 
 ## 🚀 Getting Started
 
@@ -99,7 +104,12 @@ rosdep update && rosdep install --from-paths src --ignore-src -y
 colcon build
 source install/setup.bash
 
-# 1.3 Set up RIO workspace
+# 1.3 Building Micro ROS Agent
+ros2 run micro_ros_setup create_agent_ws.sh
+ros2 run micro_ros_setup build_agent.sh
+source install/local_setup.bash
+
+# 1.4 Set up RIO workspace
 mkdir -p ~/rio_ws/src
 cd ~/rio_ws/src
 git clone https://github.com/botforge-robotics/rio_ros2.git
@@ -182,7 +192,6 @@ ros2 launch rio_mapping mapping.launch.py \
 # 5.2.1.1 Launch joystick teleop
 ros2 launch rio_teleop teleop_joy.launch.py
 ```
-
 > **Note**: Refer joystick params in _rio_teleop/params/joystick.yaml_ for any modifications.
 
 ##### 5.2.2 RQT Robot Steering GUI
@@ -240,3 +249,4 @@ ros2 launch rio_simulation rviz.launch.py \
 | Parameter | Description | Default Value | Options |
 |-----------|-------------|---------------|---------|
 | `rviz_config` | RViz config file | `default.rviz` | Any .rviz config |
+
