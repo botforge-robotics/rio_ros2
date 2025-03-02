@@ -14,14 +14,52 @@
     <img src="https://img.shields.io/github/repo-size/botforge-robotics/rio_ros2" alt="Repo Size"/>
 </div>
 
-<!-- Start of Selection -->
 <h2 align="center">Welcome to the Project RIO!</h2>
-<!-- End of Selection -->
 
-<!-- Start of Selection -->
 <img src="./rio_description/images/rio.12a.jpg" style="border-radius: 15px; margin-bottom:10px;" alt="RIO">
 
 🤖 **RIO Revolution** - Transform your smartphone into a fully-featured ROS2 robot! Utilize a wide array of built-in mobile sensors, including the Accelerometer, Gyro, Compass, GPS, NFC, IR, Ambient Light, Fingerprint Scanner, Cameras, and Mic/Speaker, as ROS2 topics, services, and actions. With the integration of Lidar, we can enable autonomously navigating companion robots that express emotions through animated facial expressions, while also extending functionality with our custom hardware platform.
+
+## 📑 Table of Contents
+- [📑 Table of Contents](#-table-of-contents)
+  - [📱 Mobile Core Features](#-mobile-core-features)
+  - [🛠️ Hardware Expansion](#️-hardware-expansion)
+- [🏛️ Rio Architecture](#️-rio-architecture)
+- [⚙️ Requirements](#️-requirements)
+  - [Hardware Requirements](#hardware-requirements)
+  - [Software Requirements](#software-requirements)
+- [🚀 Getting Started](#-getting-started)
+  - [1. Environment Setup](#1-environment-setup)
+    - [1.1 ROS2 Setup](#11-ros2-setup)
+    - [1.2 Micro-ROS Setup](#12-micro-ros-setup)
+    - [1.3 RIO Workspace Setup](#13-rio-workspace-setup)
+    - [1.4 Shell Configuration](#14-shell-configuration)
+  - [2. Terminal Configuration](#2-terminal-configuration)
+  - [3. Real Robot Launch](#3-real-robot-launch)
+  - [4. Simulation Launch](#4-simulation-launch)
+  - [5. Mapping \& Navigation](#5-mapping--navigation)
+    - [5.1 Create Map](#51-create-map)
+    - [5.2 Teleoperation Methods](#52-teleoperation-methods)
+      - [5.2.1 Joystick Teleop](#521-joystick-teleop)
+      - [5.2.2 RQT Robot Steering GUI](#522-rqt-robot-steering-gui)
+    - [5.3 Save Map](#53-save-map)
+    - [5.4 Autonomous Navigation](#54-autonomous-navigation)
+  - [6. Visualization Tools](#6-visualization-tools)
+- [📡 RIO Interfaces](#-rio-interfaces)
+  - [📢 Topics](#-topics)
+    - [Publishers](#publishers)
+    - [Subscribers](#subscribers)
+  - [⚡ Actions](#-actions)
+    - [🔐 Authentication (`/auth`)](#-authentication-auth)
+    - [📱 SMS Sending (`/sms`)](#-sms-sending-sms)
+    - [🗣️ Text-to-Speech (`/tts`)](#️-text-to-speech-tts)
+  - [🔧 Services](#-services)
+    - [📸 Camera Control (`/enable_camera`)](#-camera-control-enable_camera)
+    - [😊 Expression Management](#-expression-management)
+      - [Get Expression Status (`/expression_status`)](#get-expression-status-expression_status)
+      - [Set Expression (`/set_expression`)](#set-expression-set_expression)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ### 📱 Mobile Core Features
 
@@ -91,33 +129,59 @@
 
 ### 1. Environment Setup
 
+#### 1.1 ROS2 Setup
 ```bash
-# 1.1 Source ROS installation
+# Source ROS installation
 source /opt/ros/$ROS_DISTRO/setup.bash
+```
 
-# 1.2 Set up Micro-ROS workspace
+#### 1.2 Micro-ROS Setup
+```bash
+# Set up Micro-ROS workspace
 mkdir -p ~/uros_ws/src
 cd ~/uros_ws/src
 git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git
+
+# Build Micro-ROS
 cd ~/uros_ws
 rosdep update && rosdep install --from-paths src --ignore-src -y
 colcon build
 source install/setup.bash
 
-# 1.3 Building Micro ROS Agent
+# Build Micro-ROS Agent
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
 source install/local_setup.bash
+```
 
-# 1.4 Set up RIO workspace
+#### 1.3 RIO Workspace Setup
+```bash
+# Set up RIO workspace
 mkdir -p ~/rio_ws/src
 cd ~/rio_ws/src
 git clone https://github.com/botforge-robotics/rio_ros2.git
+
+# Build RIO packages
 cd ~/rio_ws
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
 source install/setup.bash
 ```
+
+#### 1.4 Shell Configuration
+```bash
+# Add to ~/.bashrc for automatic sourcing
+echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+echo "source ~/uros_ws/install/setup.bash" >> ~/.bashrc
+echo "source ~/rio_ws/install/setup.bash" >> ~/.bashrc
+
+# For existing terminals, manually source:
+source /opt/ros/$ROS_DISTRO/setup.bash
+source ~/uros_ws/install/setup.bash
+source ~/rio_ws/install/setup.bash
+```
+
+> **Note**: Ensure all commands complete successfully before proceeding to the next section.
 
 ### 2. Terminal Configuration
 
@@ -235,7 +299,6 @@ ros2 launch rio_navigation navigation.launch.py \
 | `params_file` | Navigation parameters | `nav2_real_params.yaml` | YAML config file name, Available: `nav2_real_params.yaml`/ `nav2_sim_params.yaml` |
 | `use_sim_time` | Use simulation clock | `false` | `true`/`false` |
 
-### Visualization Tools
 
 ### 6. Visualization Tools
 
@@ -250,71 +313,48 @@ ros2 launch rio_simulation rviz.launch.py \
 |-----------|-------------|---------------|---------|
 | `rviz_config` | RViz config file | `default.rviz` | Any .rviz config |
 
+
 ## 📡 RIO Interfaces
+### 📢 Topics
 
-### Topics
+#### Publishers
 
-#### Publishers (Mobile App → ROS2)
-| Topic | Type | Description |
-|-------|------|-------------|
-| `/battery` | `sensor_msgs/BatteryState` | Battery status information |
-| `/expression` | `std_msgs/String` | Current facial expression |
-| `/gps` | `sensor_msgs/NavSatFix` | GPS location data |
-| `/imu/data` | `sensor_msgs/Imu` | Raw IMU data (accelerometer, gyroscope) |
-| `/imu/mag` | `sensor_msgs/MagneticField` | Magnetometer readings |
-| `/imu/orientation` | `geometry_msgs/Quaternion` | Device orientation in quaternions |
-| `/imu/absolute_orientation` | `geometry_msgs/Quaternion` | Absolute orientation with magnetic reference |
-| `/imu/heading` | `std_msgs/Float32` | Heading angle in degrees |
-| `/imu/linear_acceleration` | `geometry_msgs/Vector3` | Linear acceleration without gravity |
-| `/illuminance` | `sensor_msgs/Illuminance` | Ambient light sensor readings |
-| `/speech_recognition/result` | `std_msgs/String` | Recognized speech text |
-| `/speech_recognition/status` | `std_msgs/String` | Speech Recognition system status ("listening", "done") |
-| `/speech_recognition/hotword_detected` | `std_msgs/Empty` | Wake word detection |
+- `/battery` (`sensor_msgs/BatteryState`) - Battery status information
+- `/expression` (`std_msgs/String`) - Current facial expression
+- `/gps` (`sensor_msgs/NavSatFix`) - GPS location data
+- `/illuminance` (`sensor_msgs/Illuminance`) - Ambient light sensor readings
+- `/imu/absolute_orientation` (`geometry_msgs/Vector3Stamped`) - Absolute orientation using magnetic reference
+- `/imu/data` (`sensor_msgs/Imu`) - Combined IMU data with acceleration, velocity and orientation
+- `/imu/heading` (`std_msgs/Float32`) - Compass heading in degrees (0-360°)
+- `/imu/linear_acceleration` (`geometry_msgs/Vector3Stamped`) - User acceleration without gravity (m/s²)
+- `/imu/mag` (`sensor_msgs/MagneticField`) - Magnetometer readings in μT (micro-Tesla)
+- `/imu/orientation` (`geometry_msgs/Vector3Stamped`) - Device orientation (pitch, roll, yaw)
+- `/odom` (`nav_msgs/Odometry`) - Robot odometry data
+- `/scan` (`sensor_msgs/LaserScan`) - LIDAR scan data
+- `/sonar` (`sensor_msgs/Range`) - Ultrasonic sensor range data
+- `/speech_recognition/hotword_detected` (`std_msgs/Empty`) - Wake word detection
+- `/speech_recognition/result` (`std_msgs/String`) - Recognized speech text
+- `/speech_recognition/status` (`std_msgs/String`) - Speech Recognition system status ("listening", "done")
 
-#### Publishers (PCB → ROS2)
-| Topic | Type | Description |
-|-------|------|-------------|
-| `/scan` | `sensor_msgs/LaserScan` | LIDAR scan data |
-| `/sonar` | `sensor_msgs/Range` | Ultrasonic sensor range data |
-| `/odom` | `nav_msgs/Odometry` | Robot odometry data |
+#### Subscribers
+- `/cmd_vel` (`geometry_msgs/Twist`) - Control robot's linear and angular velocity.
 
-#### Subscribers (Mobile App ← ROS2)
-| Topic | Type | Description |
-|-------|------|-------------|
-| `/torch` | `std_msgs/Bool` | Flashlight control |
+- `/left_led` (`std_msgs/ColorRGBA`) - Control left LED color with RGBA values (RGB: 0-255, Alpha: 0-255)
 
-#### Subscribers (PCB ← ROS2)
-| Topic | Type | Description |
-|-------|------|-------------|
-| `/cmd_vel` | `geometry_msgs/Twist` | Robot velocity commands |
-| `/servoA` | `std_msgs/Int16` | Servo A position control (0-180°) |
-| `/servoB` | `std_msgs/Int16` | Servo B position control (0-180°) |
-| `/left_led` | `std_msgs/ColorRGBA` | Left LED RGBA control |
-| `/right_led` | `std_msgs/ColorRGBA` | Right LED RGBA control |
+- `/right_led` (`std_msgs/ColorRGBA`) - Control right LED color with RGBA values (RGB: 0-255, Alpha: 0-255)
 
-### Actions
+- `/servoA` (`std_msgs/Int16`) - Control servo A position in degrees (0-180)
 
-#### Text-to-Speech (`/tts`)
-- **Type**: `rio_interfaces/action/TTS`
-- **Description**: Converts text to speech with facial expressions
-- **Usage**:
-  ```bash
-  # Send goal
-  ros2 action send_goal /tts rio_interfaces/action/TTS \
-    "{text: 'Hello, how are you?', voice_output: true, start_expression: 'happy', end_expression: 'neutral', expression_sound: false}"
-  ```
+- `/servoB` (`std_msgs/Int16`) - Control servo B position in degrees (0-180)
 
-#### SMS Sending (`/sms`)
-- **Type**: `rio_interfaces/action/Sms`
-- **Description**: Send SMS messages using phone's cellular network
-- **Usage**:
-  ```bash
-  # Send goal
-  ros2 action send_goal /sms rio_interfaces/action/Sms \
-    "{number: 1234567890, message: 'Hello from RIO!', sim_slot: 0}"
-  ```
+- `/torch` (`std_msgs/Bool`) - Control phone's flashlight (true = on, false = off)
 
-#### Authentication (`/auth`)
+</details>
+
+---
+### ⚡ Actions
+
+#### 🔐 Authentication (`/auth`)
 - **Type**: `rio_interfaces/action/Auth`
 - **Description**: Authenticate using phone's biometric sensors
 - **Usage**:
@@ -324,9 +364,30 @@ ros2 launch rio_simulation rviz.launch.py \
     "{message: 'Please authenticate to continue'}"
   ```
 
-### Services
+#### 📱 SMS Sending (`/sms`)
+- **Type**: `rio_interfaces/action/Sms`
+- **Description**: Send SMS messages using phone's cellular network
+- **Usage**:
+  ```bash
+  # Send goal
+  ros2 action send_goal /sms rio_interfaces/action/Sms \
+    "{number: 1234567890, message: 'Hello from RIO!', sim_slot: 0}"
+  ```
 
-#### Camera Control (`/enable_camera`)
+#### 🗣️ Text-to-Speech (`/tts`)
+- **Type**: `rio_interfaces/action/TTS`
+- **Description**: Converts text to speech with facial expressions
+- **Usage**:
+  ```bash
+  # Send goal
+  ros2 action send_goal /tts rio_interfaces/action/TTS \
+    "{text: 'Hello, how are you?', voice_output: true, start_expression: 'happy', end_expression: 'neutral', expression_sound: false}"
+  ```
+
+---
+### 🔧 Services
+
+#### 📸 Camera Control (`/enable_camera`)
 - **Type**: `rio_interfaces/srv/Camera`
 - **Description**: Control phone's front/back cameras
 - **Usage**:
@@ -347,40 +408,7 @@ ros2 launch rio_simulation rviz.launch.py \
   - `direction`: 0 (front) or 1 (back)
   - `status`: true (enable) or false (disable)
 
-#### Expression Management
-##### Set Expression (`/set_expression`)
-- **Type**: `rio_interfaces/srv/Expression`
-- **Description**: Set robot's facial expression
-- **Available Expressions**:
-  | Expression | Description |
-  |------------|-------------|
-  | `idle` | Default neutral state |
-  | `listening` | Active listening mode |
-  | `thinking` | Processing or computing |
-  | `speaking` | Talking animation |
-  | `curious` | Shows interest or curiosity |
-  | `afraid` | Displays fear or concern |
-  | `blush` | Embarrassed or shy |
-  | `angry` | Shows frustration or anger |
-  | `sad` | Displays sadness |
-  | `happy` | Shows joy or pleasure |
-  | `surprise` | Displays astonishment |
-  | `sleep` | Power saving mode |
-  | `wakeup` | Activation animation |
-- **Usage**:
-  ```bash
-  # Set happy expression with sound
-  ros2 service call /set_expression rio_interfaces/srv/Expression \
-    "{expression: 'happy', expression_sound: true}"
-
-  # Set neutral expression without sound
-  ros2 service call /set_expression rio_interfaces/srv/Expression \
-    "{expression: 'neutral', expression_sound: false}"
-
-  # Set thinking expression with sound
-  ros2 service call /set_expression rio_interfaces/srv/Expression \
-    "{expression: 'thinking', expression_sound: true}"
-  ```
+#### 😊 Expression Management
 
 ##### Get Expression Status (`/expression_status`)
 - **Type**: `rio_interfaces/srv/GetExpression`
@@ -391,5 +419,40 @@ ros2 launch rio_simulation rviz.launch.py \
   ros2 service call /expression_status rio_interfaces/srv/GetExpression "{}"
   ```
 
-> **Note**: All examples use command-line interface. For programmatic usage, refer to the [rio_interfaces](https://github.com/botforge-robotics/rio_interfaces) package documentation.
+##### Set Expression (`/set_expression`)
+- **Type**: `rio_interfaces/srv/Expression`
+- **Description**: Set robot's facial expression
+- **Available Expressions**:
+  | Expression | Description |
+  |------------|-------------|
+  | `afraid` | Displays fear or concern |
+  | `angry` | Shows frustration or anger |
+  | `blush` | Embarrassed or shy |
+  | `curious` | Shows interest or curiosity |
+  | `happy` | Shows joy or pleasure |
+  | `idle` | Default neutral state |
+  | `listening` | Active listening mode |
+  | `sad` | Displays sadness |
+  | `sleep` | Power saving mode |
+  | `speaking` | Talking animation |
+  | `surprise` | Displays astonishment |
+  | `thinking` | Processing or computing |
+  | `wakeup` | Activation animation |
+- **Usage**:
+  ```bash
+  # Set happy expression with sound
+  ros2 service call /set_expression rio_interfaces/srv/Expression \
+    "{expression: 'happy', expression_sound: true}"
+  ```
 
+## 🤝 Contributing
+1. Fork the Repository
+2. Create Feature Branch
+3. Commit Changes
+4. Push to Branch
+5. Open Pull Request
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
