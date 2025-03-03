@@ -58,6 +58,7 @@
     - [😊 Expression Management](#-expression-management)
       - [Get Expression Status (`/expression_status`)](#get-expression-status-expression_status)
       - [Set Expression (`/set_expression`)](#set-expression-set_expression)
+- [Future Scope](#future-scope)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
@@ -445,12 +446,23 @@ ros2 launch rio_simulation rviz.launch.py \
     "{expression: 'happy', expression_sound: true}"
   ```
 
+## Future Scope
+- Implement existing mobile sensors to enhance RIO's capabilities, including:
+  - **IR Sensor**: Utilize for remote controlling appliances.
+  - **NFC**: Integrate for reading tags and facilitating interactions.
+  - **Touch Gestures**: Implement tap and swipe gestures for user interaction.
+  - **On-board Object Detection**: Develop capabilities for recognizing objects withonboard CNN.
+  - **Auto Pilot - Tensorflow**: Implement CNNs for steering control based on camera input, inspired by [PilotNet](https://github.com/lhzlhz/PilotNet).
+  - **ADAS Features**: Incorporate advanced driver assistance systems similar to those in [FlowPilot](https://github.com/flowdriveai/flowpilot).
+  - **And many more...**
+
 ## 🤝 Contributing
 1. Fork the Repository
 2. Create Feature Branch
 3. Commit Changes
 4. Push to Branch
 5. Open Pull Request
+
 
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
