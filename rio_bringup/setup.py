@@ -33,6 +33,8 @@ setup(
             'lidar_udp_node = rio_bringup.lidar_udp_node:main',
             'webrtc_node = rio_bringup.webrtc_node:main',   
             'ollama_nlp_node = rio_bringup.ollama_nlp_node:main',
+            'mobile_frame = rio_bringup.frame:main',
+            'imu_viz_2d = rio_bringup.imu_viz_2d:main',
         ],
     },
 )

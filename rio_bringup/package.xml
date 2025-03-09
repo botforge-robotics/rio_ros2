@@ -16,6 +16,7 @@
   <depend>rio_mapping</depend>
   <depend>rosbridge_server</depend>
   <depend>image_transport_plugins</depend>
+  <depend>visualization_msgs</depend>
   <exec_depend>image_transport</exec_depend>
   <export>
     <build_type>ament_python</build_type>
