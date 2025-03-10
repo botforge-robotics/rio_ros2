@@ -449,7 +449,6 @@ ros2 launch rio_simulation rviz.launch.py \
 ## Future Scope
 - Implement existing mobile sensors to enhance RIO's capabilities, including:
   - **IR Sensor**: Utilize for remote controlling appliances.
-  - **NFC**: Integrate for reading tags and facilitating interactions.
   - **Touch Gestures**: Implement tap and swipe gestures for user interaction.
   - **On-board Object Detection**: Develop capabilities for recognizing objects withonboard CNN.
   - **Auto Pilot - Tensorflow**: Implement CNNs for steering control based on camera input, inspired by [PilotNet](https://github.com/lhzlhz/PilotNet).
