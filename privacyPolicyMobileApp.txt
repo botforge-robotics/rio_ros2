@@ -1,15 +1,18 @@
-Privacy Policy for ROS2Sense
+**Privacy Policy for ROS2Sense**
 
-Last Updated: [Current Date]
+**Last Updated:** [Current Date]
 
-1. Introduction
+---
 
+### **1. Introduction**
 Welcome to ROS2Sense ("we," "our," or "us"). This privacy policy explains how we collect, use, and protect your information when you use our mobile application ROS2Sense (the "App").
 
-2. Information We Collect
+---
 
-2.1 Sensor Data
-Our app collects data from various device sensors including:
+### **2. Information We Collect**
+
+#### **2.1 Sensor Data**
+Our app collects data from various device sensors, including:
 - Accelerometer
 - Gyroscope
 - Magnetometer
@@ -18,94 +21,114 @@ Our app collects data from various device sensors including:
 - Pressure Sensor
 - Temperature Sensor
 - Humidity Sensor
-- NFC (Near Field Communication)
 - Camera
 - Flash
+- Microphone
+- Speaker
+- Fingerprint/Face ID
+- SMS
 
-2.2 How We Use Sensor Data
-- All sensor data is processed locally on your device
-- Data is used for ROS2 (Robot Operating System 2) communication
-- No sensor data is stored permanently on your device
-- No sensor data is transmitted to external servers except when explicitly sharing with ROS2 nodes
-- Camera access is used only for computer vision processing
-- GPS location is used only for robotics applications
-- NFC is used only for tag reading and writing operations
+#### **2.2 How We Use Sensor Data**
+- All sensor data is processed locally on your device.
+- Data is used for ROS2 (Robot Operating System 2) communication.
+- No sensor data is stored permanently on your device.
+- No sensor data is transmitted to external servers except when explicitly sharing with ROS2 nodes.
+- **Camera** access is used only for computer vision processing.
+- **GPS** location is used only for robotics applications.
+- **Fingerprint/Face ID** is used for authentication and security purposes within robotics applications.
+- **SMS** permission is used to allow the app to send automated messages based on ROS2 actions.
 
-3. Data Storage and Transmission
+---
 
-3.1 Local Storage
-- The app stores minimal configuration data locally
-- No sensitive personal information is stored
-- All sensor readings are temporary and cleared when the app is closed
+### **3. Data Storage and Transmission**
 
-3.2 Data Transmission
-- Data is only transmitted to ROS2 nodes on your local network
-- No data is sent to our servers
-- All network communication is confined to your local network
-- We do not collect or transmit any personal information
+#### **3.1 Local Storage**
+- The app stores minimal configuration data locally.
+- No sensitive personal information is stored.
+- All sensor readings are temporary and cleared when the app is closed.
 
-4. Permissions
+#### **3.2 Data Transmission**
+- Data is only transmitted to ROS2 nodes on your local network.
+- No data is sent to our servers.
+- All network communication is confined to your local network.
+- We do not collect or transmit any personal information.
 
+---
+
+### **4. Permissions**
 The app requires the following permissions:
-- Camera: For computer vision processing
-- Location: For GPS sensor data
-- NFC: For tag reading/writing
-- Sensors: For accessing device sensors
-- Network: For ROS2 communication
+- **Camera:** For computer vision processing.
+- **Location:** For GPS sensor data.
+- **Fingerprint/Face ID:** For authentication and security.
+- **Sensors:** For accessing device sensors.
+- **Network:** For ROS2 communication.
+- **SMS:** To send messages based on ROS2 actions.
 
-5. Children's Privacy
+---
 
+### **5. Children's Privacy**
 Our app does not knowingly collect personal information from children under 13.
 
-6. Changes to This Privacy Policy
+---
 
+### **6. Changes to This Privacy Policy**
 We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.
 
-7. Your Rights
+---
 
+### **7. Your Rights**
 You have the right to:
-- Access your data
-- Delete your data
-- Restrict processing
-- Data portability
+- Access your data.
+- Delete your data.
+- Restrict processing.
+- Data portability.
 
-8. Contact Us
+---
 
+### **8. Contact Us**
 If you have any questions about this privacy policy, please contact us at:
-[Your Contact Email]
+reachus@botforge.in
 
-9. Consent
+---
 
+### **9. Consent**
 By using our app, you consent to our privacy policy.
 
-10. Third-Party Services
+---
 
+### **10. Third-Party Services**
 Our app does not use any third-party services that collect user data.
 
-11. Security
+---
 
+### **11. Security**
 We implement appropriate technical and organizational measures to protect your data:
-- All local data is stored securely
-- Network communications are confined to local networks
-- No cloud storage or external servers are used
+- All local data is stored securely.
+- Network communications are confined to local networks.
+- No cloud storage or external servers are used.
 
-12. Data Retention
+---
 
-- We do not retain any sensor data
-- Configuration settings are retained until app uninstallation
-- You can clear all local data by uninstalling the app
+### **12. Data Retention**
+- We do not retain any sensor data.
+- Configuration settings are retained until app uninstallation.
+- You can clear all local data by uninstalling the app.
 
-13. Compliance
+---
 
+### **13. Compliance**
 This privacy policy complies with:
-- Google Play Store requirements
-- GDPR (General Data Protection Regulation)
-- CCPA (California Consumer Privacy Act)
+- Google Play Store requirements.
+- GDPR (General Data Protection Regulation).
+- CCPA (California Consumer Privacy Act).
 
-14. Disclaimer
+---
 
+### **14. Disclaimer**
 While we take precautions to protect your data, please note that no method of transmission over the internet or electronic storage is 100% secure.
 
-15. Updates and Notifications
+---
 
-We may update this privacy policy periodically. The latest version will always be available in the app and on the Google Play Store listing. 
+### **15. Updates and Notifications**
+We may update this privacy policy periodically. The latest version will always be available in the app and on the Google Play Store listing.
+
