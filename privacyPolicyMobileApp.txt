@@ -36,7 +36,7 @@ Our app collects data from various device sensors, including:
 - **Camera** access is used only for computer vision processing.
 - **GPS** location is used only for robotics applications.
 - **Fingerprint/Face ID** is used for authentication and security purposes within robotics applications.
-- **SMS** permission is used to allow the app to send automated messages based on ROS2 actions.
+- **SMS** permission is used to allow the app to send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
 
 ---
 
