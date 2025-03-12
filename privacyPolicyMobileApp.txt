@@ -1,6 +1,6 @@
 **Privacy Policy for ROS2Sense**
 
-**Last Updated:** [Current Date]
+**Last Updated:** 13 March 2025
 
 ---
 
@@ -18,10 +18,10 @@ Our app collects data from various device sensors, including:
 - Magnetometer
 - GPS/Location
 - Ambient Light Sensor
-- Pressure Sensor
-- Temperature Sensor
-- Humidity Sensor
-- Camera
+- Pressure Sensor (few mobile, e.g., Samsung S4)
+- Temperature Sensor (few mobile, e.g., Samsung S4)
+- Humidity Sensor (few mobile, e.g., Samsung S4)
+- Camera Front & Back
 - Flash
 - Microphone
 - Speaker
@@ -33,10 +33,10 @@ Our app collects data from various device sensors, including:
 - Data is used for ROS2 (Robot Operating System 2) communication.
 - No sensor data is stored permanently on your device.
 - No sensor data is transmitted to external servers except when explicitly sharing with ROS2 nodes.
-- **Camera** access is used only for computer vision processing.
-- **GPS** location is used only for robotics applications.
-- **Fingerprint/Face ID** is used for authentication and security purposes within robotics applications.
-- **SMS** permission is used to allow the app to send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
+- **Camera** access transmits raw image data to ROS2 nodes exclusively through user-triggered ROS actions/services. No on-device processing or storage occurs.
+- **GPS** location data is streamed to ROS2 nodes only when activated by user-defined ROS commands. Location information is not processed or retained locally.
+- **Fingerprint/Face ID** biometric verification is executed through ROS2-authenticated actions initiated by user triggers. Biometric data is never stored or transfered.
+- **SMS** To send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
 
 ---
 
@@ -57,13 +57,11 @@ Our app collects data from various device sensors, including:
 
 ### **4. Permissions**
 The app requires the following permissions:
-- **Camera:** For computer vision processing.
-- **Location:** For GPS sensor data.
-- **Fingerprint/Face ID:** For authentication and security.
-- **Sensors:** For accessing device sensors.
-- **Network:** For ROS2 communication.
-- **SMS:** To send messages based on ROS2 actions.
-
+- **Camera:** Temporary access to transmit raw image data exclusively through user-initiated ROS2 topics. No images are stored or processed locally.
+- **Location:** GPS data streaming limited to active ROS2 sessions using user-activated ROS2 commands. Location information is never persisted on the device.
+- **Fingerprint/Face ID:** Biometric authentication for ROS2-secured operations initiated through explicit user interaction. Biometric templates never leave the device and are not transmitted.
+- **Network:** Local network access restricted to ROS2 node communication within user-configured private networks.
+- **SMS:** permission allows the app to send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
 ---
 
 ### **5. Children's Privacy**
@@ -131,4 +129,3 @@ While we take precautions to protect your data, please note that no method of tr
 
 ### **15. Updates and Notifications**
 We may update this privacy policy periodically. The latest version will always be available in the app and on the Google Play Store listing.
-
