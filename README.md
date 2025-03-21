@@ -51,7 +51,6 @@
     - [Subscribers](#subscribers)
   - [⚡ Actions](#-actions)
     - [🔐 Authentication (`/auth`)](#-authentication-auth)
-    - [📱 SMS Sending (`/sms`)](#-sms-sending-sms)
     - [🗣️ Text-to-Speech (`/tts`)](#️-text-to-speech-tts)
   - [🔧 Services](#-services)
     - [📸 Camera Control (`/enable_camera`)](#-camera-control-enable_camera)
@@ -110,7 +109,7 @@
 ## 🏛️ Rio Architecture
 
 <div style="text-align: center; margin: 20px;">
-    <img src="./rio_description/images/rio_architecture.jpg" alt="PCB Placeholder" style="max-width: 95%; height: auto; border-radius: 8px; ">
+    <img src="./rio_description/images/rio_architecture.png" alt="PCB Placeholder" style="max-width: 95%; height: auto; border-radius: 8px; ">
 </div>
 
 ## ⚙️ Requirements
@@ -363,16 +362,6 @@ ros2 launch rio_simulation rviz.launch.py \
   # Send goal
   ros2 action send_goal /auth rio_interfaces/action/Auth \
     "{message: 'Please authenticate to continue'}"
-  ```
-
-#### 📱 SMS Sending (`/sms`)
-- **Type**: `rio_interfaces/action/Sms`
-- **Description**: Send SMS messages using phone's cellular network
-- **Usage**:
-  ```bash
-  # Send goal
-  ros2 action send_goal /sms rio_interfaces/action/Sms \
-    "{number: 1234567890, message: 'Hello from RIO!', sim_slot: 0}"
   ```
 
 #### 🗣️ Text-to-Speech (`/tts`)
