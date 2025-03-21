@@ -26,7 +26,6 @@ Our app collects data from various device sensors, including:
 - Microphone
 - Speaker
 - Fingerprint/Face ID
-- SMS
 
 #### **2.2 How We Use Sensor Data**
 - All sensor data is processed locally on your device.
@@ -36,7 +35,6 @@ Our app collects data from various device sensors, including:
 - **Camera** access transmits raw image data to ROS2 nodes exclusively through user-triggered ROS actions/services. No on-device processing or storage occurs.
 - **GPS** location data is streamed to ROS2 nodes only when activated by user-defined ROS commands. Location information is not processed or retained locally.
 - **Fingerprint/Face ID** biometric verification is executed through ROS2-authenticated actions initiated by user triggers. Biometric data is never stored or transfered.
-- **SMS** To send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
 
 ---
 
@@ -61,7 +59,6 @@ The app requires the following permissions:
 - **Location:** GPS data streaming limited to active ROS2 sessions using user-activated ROS2 commands. Location information is never persisted on the device.
 - **Fingerprint/Face ID:** Biometric authentication for ROS2-secured operations initiated through explicit user interaction. Biometric templates never leave the device and are not transmitted.
 - **Network:** Local network access restricted to ROS2 node communication within user-configured private networks.
-- **SMS:** permission allows the app to send automated messages based on ROS2 actions. Messages are only sent when triggered by user-defined ROS actions. No messages are stored or sent to third-party servers.
 ---
 
 ### **5. Children's Privacy**
