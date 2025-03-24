@@ -1,8 +1,6 @@
-<p align="center">
-    <img src="https://img.shields.io/badge/🚀%20COMING%20SOON-brightgreen?style=for-the-badge" width="300" alt="Coming Soon"/>
-</p>
+
 <div align="center">
-    <img src="https://img.shields.io/badge/ROS2-Iron-blue" alt="ROS2"/>
+    <img src="https://img.shields.io/badge/ROS2-Humble-blue" alt="ROS2"/>
     <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status"/>
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="License"/>
     <img src="https://img.shields.io/badge/platform-Ubuntu%2022.04-orange" alt="Platform"/>
@@ -33,7 +31,6 @@
     - [1.1 ROS2 Setup](#11-ros2-setup)
     - [1.2 Micro-ROS Setup](#12-micro-ros-setup)
     - [1.3 RIO Workspace Setup](#13-rio-workspace-setup)
-    - [1.4 Shell Configuration](#14-shell-configuration)
   - [2. Terminal Configuration](#2-terminal-configuration)
   - [3. Real Robot Launch](#3-real-robot-launch)
   - [4. Simulation Launch](#4-simulation-launch)
@@ -121,9 +118,9 @@
 
 ### Software Requirements
 
-- [ROS 2 Iron Irwini](https://docs.ros.org/en/iron/Installation.html) (Recommended)
+- [ROS 2 Humble](https://docs.ros.org/en/humble/Installation.html) (Recommended)
 - [Ollama Installation](https://ollama.ai/download) (Local LLM Execution)
-- [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) (Coming Soon on Play Store)
+- [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) ( Play Store)
 
 ## 🚀 Getting Started
 
@@ -151,7 +148,7 @@ source install/setup.bash
 # Build Micro-ROS Agent
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
-source install/local_setup.bash
+source install/setup.bash
 ```
 
 #### 1.3 RIO Workspace Setup
@@ -167,21 +164,6 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build
 source install/setup.bash
 ```
-
-#### 1.4 Shell Configuration
-```bash
-# Add to ~/.bashrc for automatic sourcing
-echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
-echo "source ~/uros_ws/install/setup.bash" >> ~/.bashrc
-echo "source ~/rio_ws/install/setup.bash" >> ~/.bashrc
-
-# For existing terminals, manually source:
-source /opt/ros/$ROS_DISTRO/setup.bash
-source ~/uros_ws/install/setup.bash
-source ~/rio_ws/install/setup.bash
-```
-
-> **Note**: Ensure all commands complete successfully before proceeding to the next section.
 
 ### 2. Terminal Configuration
 
