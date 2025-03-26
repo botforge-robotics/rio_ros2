@@ -32,16 +32,18 @@
     - [1.2 Micro-ROS Setup](#12-micro-ros-setup)
     - [1.3 RIO Workspace Setup](#13-rio-workspace-setup)
   - [2. Terminal Configuration](#2-terminal-configuration)
-  - [3. Real Robot Launch](#3-real-robot-launch)
-  - [4. Simulation Launch](#4-simulation-launch)
-  - [5. Mapping \& Navigation](#5-mapping--navigation)
-    - [5.1 Create Map](#51-create-map)
-    - [5.2 Teleoperation Methods](#52-teleoperation-methods)
-      - [5.2.1 Joystick Teleop](#521-joystick-teleop)
-      - [5.2.2 RQT Robot Steering GUI](#522-rqt-robot-steering-gui)
-    - [5.3 Save Map](#53-save-map)
-    - [5.4 Autonomous Navigation](#54-autonomous-navigation)
-  - [6. Visualization Tools](#6-visualization-tools)
+  - [3. Mobile Nodes Launch](#3-mobile-nodes-launch)
+  - [4. PCB Nodes Launch](#4-pcb-nodes-launch)
+  - [5. Real Robot (Mobile+PCB) Launch](#5-real-robot-mobilepcb-launch)
+  - [6. Simulation Launch](#6-simulation-launch)
+  - [7. Mapping \& Navigation](#7-mapping--navigation)
+    - [7.1 Create Map](#71-create-map)
+    - [7.2 Teleoperation Methods](#72-teleoperation-methods)
+      - [7.2.1 Joystick Teleop](#721-joystick-teleop)
+      - [7.2.2 RQT Robot Steering GUI](#722-rqt-robot-steering-gui)
+    - [7.3 Save Map](#73-save-map)
+    - [7.4 Autonomous Navigation](#74-autonomous-navigation)
+  - [8. Visualization Tools](#8-visualization-tools)
 - [📡 RIO Interfaces](#-rio-interfaces)
   - [📢 Topics](#-topics)
     - [Publishers](#publishers)
@@ -189,10 +191,41 @@ echo "source ~/rio_ws/install/setup.bash" >> ~/.bashrc
 > source ~/rio_ws/install/setup.bash
 > ```
 
-### 3. Real Robot Launch
+### 3. Mobile Nodes Launch
+The mobile nodes launch file (`mobile_nodes.launch.py`) starts components related to the smartphone functionality:
 
 ```bash
-# 4.1 Launch real robot nodes
+# Launch mobile-related nodes
+ros2 launch rio_bringup mobile_nodes.launch.py
+```
+
+This launch file includes:
+- **Ollama NLP Node**: Natural language processing for robot interactions
+- **WebRTC Node**: Video streaming server (port 8080)
+- **Rosbridge WebSocket**: Enables ROS2-to-WebSocket communication
+
+### 4. PCB Nodes Launch
+The PCB nodes launch file (`pcb_nodes.launch.py`) manages hardware-related components:
+
+```bash
+# Launch PCB-related nodes
+ros2 launch rio_bringup pcb_nodes.launch.py agent_port:=8888
+```
+
+**PCB Launch Parameters**:
+| Parameter | Description | Default Value |
+|-----------|-------------|---------------|
+| `agent_port` | Micro-ROS agent UDP port | `8888` |
+
+This launch file includes:
+- **Micro-ROS Agent**: Handles communication with ESP32
+- **Odometry TF Broadcaster**: Publishes transform data
+- **LIDAR UDP Node**: Manages LIDAR sensor data
+
+### 5. Real Robot (Mobile+PCB) Launch
+
+```bash
+# 5.1 Launch real robot nodes
 ros2 launch rio_bringup rio_real_robot.launch.py \
   use_sim_time:=false \
   agent_port:=8888
@@ -204,7 +237,7 @@ ros2 launch rio_bringup rio_real_robot.launch.py \
 | `use_sim_time` | Use simulation clock (must be false for real hardware) | `false` | `true`/`false` |
 | `agent_port` | Micro-ROS agent UDP port | `8888` | Any available port number |
 
-### 4. Simulation Launch
+### 6. Simulation Launch
 
 ```bash
 # 3.1 Launch Gazebo simulation
@@ -219,9 +252,9 @@ ros2 launch rio_simulation gazebo.launch.py \
 | `world` | Gazebo world file | `empty.world` | `house.world`, `warehouse.world` |
 | `use_sim_time` | Use simulation clock | `true` | `true`/`false` |
 
-### 5. Mapping & Navigation
+### 7. Mapping & Navigation
 
-#### 5.1 Create Map
+#### 7.1 Create Map
 
 ```bash
 # 5.1.1 Launch SLAM mapping
@@ -230,9 +263,9 @@ ros2 launch rio_mapping mapping.launch.py \
 ```
 > **Note**: Refer mapping params in _rio_mapping/params/mapping_config.yaml_ for any modifications.
 
-#### 5.2 Teleoperation Methods
+#### 7.2 Teleoperation Methods
 
-##### 5.2.1 Joystick Teleop
+##### 7.2.1 Joystick Teleop
 
 ```bash
 # 5.2.1.1 Launch joystick teleop
@@ -240,7 +273,7 @@ ros2 launch rio_teleop teleop_joy.launch.py
 ```
 > **Note**: Refer joystick params in _rio_teleop/params/joystick.yaml_ for any modifications.
 
-##### 5.2.2 RQT Robot Steering GUI
+##### 7.2.2 RQT Robot Steering GUI
 
 ```bash
 # 5.2.2.1 Install RQT if not already installed
@@ -255,7 +288,7 @@ ros2 run rqt_robot_steering rqt_robot_steering
 >
 > - `/cmd_vel` for drive robot
 
-#### 5.3 Save Map
+#### 7.3 Save Map
 
 ```bash
 # 5.3.1 Save created map
@@ -264,7 +297,7 @@ ros2 run nav2_map_server map_saver_cli -f <map_file_name>
 
 This saves map files inside `rio_mapping/maps/` folder.
 
-#### 5.4 Autonomous Navigation
+#### 7.4 Autonomous Navigation
 
 ```bash
 # 5.4.1 Launch navigation
@@ -282,7 +315,7 @@ ros2 launch rio_navigation navigation.launch.py \
 | `use_sim_time` | Use simulation clock | `false` | `true`/`false` |
 
 
-### 6. Visualization Tools
+### 8. Visualization Tools
 
 ```bash
 # 6.1 Launch RViz
