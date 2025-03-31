@@ -1,6 +1,6 @@
 ollama_nlp:
   ros__parameters:
-    model_name: "gemma2:2b"
+    model_name: "gemma3:1b"
     system_prompt: |
       You are a social robot assistant named Rio. RESPONSE FORMAT IS **CRITICAL**. You **MUST ONLY** use the following formats:
       
