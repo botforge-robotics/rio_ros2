@@ -56,6 +56,7 @@
     - [😊 Expression Management](#-expression-management)
       - [Get Expression Status (`/expression_status`)](#get-expression-status-expression_status)
       - [Set Expression (`/set_expression`)](#set-expression-set_expression)
+- [🔗 Reference Links](#-reference-links)
 - [Future Scope](#future-scope)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -125,6 +126,9 @@
 - [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) ( Play Store)
 
 ## 🚀 Getting Started
+> **Note:** For complete ROS 2 installation directly on Android device itself, refer to our [Android Installation Guide](https://github.com/botforge-robotics/ros2_android)
+
+
 
 ### 1. Environment Setup
 
@@ -449,6 +453,13 @@ ros2 launch rio_simulation rviz.launch.py \
   ros2 service call /set_expression rio_interfaces/srv/Expression \
     "{expression: 'happy', expression_sound: true}"
   ```
+
+## 🔗 Reference Links
+
+- [RIO Hardware](https://github.com/botforge-robotics/rio_hardware) - Hardware design files, BOM and assembly instructions 
+- [RIO Firmware](https://github.com/botforge-robotics/rio_firmware) - Micro-ROS firmware for the RIO controller board
+- [ROS2 Android](https://github.com/botforge-robotics/ros2_android) - Run ROS2 Humble directly on Android using Termux
+
 
 ## Future Scope
 - Implement existing mobile sensors to enhance RIO's capabilities, including:
