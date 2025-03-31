@@ -263,9 +263,16 @@ ros2 launch rio_simulation gazebo.launch.py \
 ```bash
 # 5.1.1 Launch SLAM mapping
 ros2 launch rio_mapping mapping.launch.py \
-  use_sim_time:=false
+  use_sim_time:=false \
+  use_gui:=false
 ```
 > **Note**: Refer mapping params in _rio_mapping/params/mapping_config.yaml_ for any modifications.
+
+**Mapping Parameters**:
+| Parameter | Description | Default Value | Options |
+|-----------|-------------|---------------|---------|
+| `use_sim_time` | Use simulation clock | `false` | `true`/`false` |
+| `use_gui` |Open RVIZ2 GUI | `false` | `true`/`false` |
 
 #### 7.2 Teleoperation Methods
 
@@ -308,7 +315,8 @@ This saves map files inside `rio_mapping/maps/` folder.
 ros2 launch rio_navigation navigation.launch.py \
   map:=house.yaml \
   params_file:=nav2_real_params.yaml \
-  use_sim_time:=false
+  use_sim_time:=false \
+  use_gui:=false
 ```
 
 **Navigation Parameters**:
@@ -317,6 +325,7 @@ ros2 launch rio_navigation navigation.launch.py \
 | `map` | Map file for navigation | `house.yaml` | YAML map file name |
 | `params_file` | Navigation parameters | `nav2_real_params.yaml` | YAML config file name, Available: `nav2_real_params.yaml`/ `nav2_sim_params.yaml` |
 | `use_sim_time` | Use simulation clock | `false` | `true`/`false` |
+| `use_gui` |Open RVIZ2 GUI | `false` | `true`/`false` |
 
 
 ### 8. Visualization Tools

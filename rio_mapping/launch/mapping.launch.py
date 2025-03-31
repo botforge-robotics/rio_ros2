@@ -4,6 +4,7 @@ from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 
 
 def generate_launch_description():
@@ -15,6 +16,11 @@ def generate_launch_description():
             default_value='false',
             description='Use simulation time if true'
         ),
+        DeclareLaunchArgument(
+            'use_gui',
+            default_value='false',
+            description='Use rviz2 if true'
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [FindPackageShare('slam_toolbox'), 'launch', 'online_async_launch.py'])),
@@ -23,12 +29,16 @@ def generate_launch_description():
                 'slam_params_file': PathJoinSubstitution([pkg_share, 'params', 'mapping_config.yaml'])
             }.items()
         ),
+
         Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
             output='screen',
             arguments=[
-                '-d', PathJoinSubstitution([pkg_share, 'rviz', 'mapping.rviz'])],
+                '-d', PathJoinSubstitution([pkg_share, 'rviz', 'mapping.rviz'])
+            ],
+            condition=IfCondition(LaunchConfiguration(
+                'use_gui'))
         )
     ])

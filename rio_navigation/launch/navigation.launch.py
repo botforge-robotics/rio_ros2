@@ -6,6 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 
 
 def generate_launch_description():
@@ -40,6 +41,12 @@ def generate_launch_description():
             description='Use simulation (Gazebo) clock if true'
         ),
 
+        DeclareLaunchArgument(
+            'use_gui',
+            default_value='false',
+            description='Use rviz2 if true'
+        ),
+
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -61,5 +68,6 @@ def generate_launch_description():
             output='screen',
             arguments=[
                 '-d', PathJoinSubstitution([pkg_share_navigation, 'rviz', 'navigation.rviz'])],
+            condition=IfCondition(LaunchConfiguration('use_gui'))
         )
     ])
