@@ -14,7 +14,7 @@ def generate_launch_description():
 
     use_sim_time_value = LaunchConfiguration('use_sim_time')
     agent_port_value = LaunchConfiguration('agent_port')
-
+    llm_backend_value = LaunchConfiguration('llm_backend')
     # Correct way to handle xacro file path
     xacro_file = os.path.join(description_pkg_share, 'urdf', 'rio_urdf.xacro')
     robot_description_config = xacro.process_file(xacro_file)
@@ -44,7 +44,8 @@ def generate_launch_description():
             'mobile_nodes.launch.py'
         )),
         launch_arguments={
-            'use_sim_time': use_sim_time_value
+            'use_sim_time': use_sim_time_value,
+            'llm_backend': llm_backend_value
         }.items()
     )
 
@@ -70,6 +71,11 @@ def generate_launch_description():
             'agent_port',
             default_value='8888',
             description='Port for micro-ROS agent'
+        ),
+        DeclareLaunchArgument(
+            'llm_backend',
+            default_value='ollama',
+            description='LLM backend to use (ollama or groq)'
         ),
         mobile_nodes_launch,  # Include mobile nodes
         pcb_nodes_launch,  
