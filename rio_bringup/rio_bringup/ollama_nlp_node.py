@@ -12,9 +12,9 @@ from ament_index_python.packages import get_package_share_directory
 import os
 from action_msgs.msg import GoalStatus
 
-class OllamaNLPNode(Node):
+class OllamaLLMNode(Node):
     def __init__(self):
-        super().__init__('ollama_nlp_node')
+        super().__init__('ollama_llm_node')
         
         # ROS2 Setup
         self.subscription = self.create_subscription(
@@ -253,7 +253,7 @@ class OllamaNLPNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = OllamaNLPNode()
+    node = OllamaLLMNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

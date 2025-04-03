@@ -12,9 +12,9 @@ import os
 from action_msgs.msg import GoalStatus
 from groq import Groq  # Correct import for Groq API
 
-class GroqNLPNode(Node):
+class GroqLLMNode(Node):
     def __init__(self):
-        super().__init__('grok_nlp_node')
+        super().__init__('groq_llm_node')
         
         # Set up Groq API key from environment variable
         groq_api_key = os.environ.get('GROQ_API_KEY')
@@ -269,7 +269,7 @@ class GroqNLPNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = GroqNLPNode()
+    node = GroqLLMNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

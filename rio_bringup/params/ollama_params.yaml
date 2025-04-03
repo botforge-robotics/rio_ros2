@@ -1,4 +1,4 @@
-ollama_nlp:
+ollama_llm:
   ros__parameters:
     model_name: "gemma3:1b"
     system_prompt: |

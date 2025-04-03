@@ -1,4 +1,4 @@
-grok_nlp:
+groq_llm:
   ros__parameters:
     model_name: "deepseek-r1-distill-llama-70b"
     system_prompt: |

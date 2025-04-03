@@ -209,19 +209,19 @@ The mobile nodes launch file (`mobile_nodes.launch.py`) starts components relate
 
 ```bash
 # Launch mobile-related nodes
-ros2 launch rio_bringup mobile_nodes.launch.py nlp_backend:=ollama
+ros2 launch rio_bringup mobile_nodes.launch.py llm_backend:=ollama
 ```
 
 This launch file includes:
-- **Ollama NLP Node**: Natural language processing for robot interactions
-- **Groq NLP Node**: Natural language processing for robot interactions
+- **Ollama LLM Node**: local LLM for robot interactions
+- **Groq LLM Node**: cloud LLM for robot interactions
 - **WebRTC Node**: Video streaming server (port 8080)
 - **Rosbridge WebSocket**: Enables ROS2-to-WebSocket communication
 
 **Mobile Node Launch Parameters**:
 | Parameter | Description | Default Value | Options |
 |-----------|-------------|---------------|---------|
-| `nlp_backend` | NLP backend | `ollama` | `ollama`, `groq` |
+| `llm_backend` | LLM backend | `ollama` | `ollama`, `groq` |
 
 ### 4. PCB Nodes Launch
 The PCB nodes launch file (`pcb_nodes.launch.py`) manages hardware-related components:

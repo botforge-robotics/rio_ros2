@@ -8,11 +8,11 @@ import os
 
 
 def generate_launch_description():
-    # Declare launch argument for NLP backend
-    nlp_backend_arg = DeclareLaunchArgument(
-        'nlp_backend',
+    # Declare launch argument for LLM backend
+    llm_backend_arg = DeclareLaunchArgument(
+        'llm_backend',
         default_value='ollama',
-        description='NLP backend to use (ollama or groq)'
+        description='LLM backend to use (ollama or groq)'
     )
     
     # Paths for params
@@ -35,14 +35,14 @@ def generate_launch_description():
     )
     
     # Create conditions for each node
-    condition_ollama = IfCondition(PythonExpression(["'", LaunchConfiguration('nlp_backend'), "' == 'ollama'"]))
-    condition_groq = IfCondition(PythonExpression(["'", LaunchConfiguration('nlp_backend'), "' == 'groq'"]))
+    condition_ollama = IfCondition(PythonExpression(["'", LaunchConfiguration('llm_backend'), "' == 'ollama'"]))
+    condition_groq = IfCondition(PythonExpression(["'", LaunchConfiguration('llm_backend'), "' == 'groq'"]))
     
-    # Ollama NLP Node
-    ollama_nlp_node = Node(
+    # Ollama LLM Node
+    ollama_llm_node = Node(
         package='rio_bringup',
-        executable='ollama_nlp_node',
-        name='ollama_nlp',
+        executable='ollama_llm_node',
+        name='ollama_llm',
         output='screen',
         parameters=[
             ollama_params_path,
@@ -51,11 +51,11 @@ def generate_launch_description():
         condition=condition_ollama
     )
     
-    # groq NLP Node
-    groq_nlp_node = Node(
+    # groq LLM Node
+    groq_llm_node = Node(
         package='rio_bringup',
-        executable='groq_nlp_node',
-        name='groq_nlp',
+        executable='groq_llm_node',
+        name='groq_llm',
         output='screen',
         parameters=[
             groq_params_path,
@@ -80,9 +80,9 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
-        nlp_backend_arg,
-        ollama_nlp_node,
-        groq_nlp_node,
+        llm_backend_arg,
+        ollama_llm_node,
+        groq_llm_node,
         webrtc_node,
         rosbridge_websocket
     ])
