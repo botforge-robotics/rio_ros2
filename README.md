@@ -123,7 +123,16 @@
 
 - [ROS 2 Humble](https://docs.ros.org/en/humble/Installation.html) (Recommended)
 - [Ollama Installation](https://ollama.ai/download) (Local LLM Execution)
+- [Groq API Key(optional if ollama is not used)](https://console.groq.com/login) (Cloud LLM Execution) create account in groq and get the api key and set it in the environment variable `GROQ_API_KEY`
+   ```
+   export GROQ_API_KEY=<your_groq_api_key>
+   ```
+  permanently add the api key to the environment variable `GROQ_API_KEY` in the `~/.bashrc` file
+  ```
+  echo "export GROQ_API_KEY=<your_groq_api_key>" >> ~/.bashrc
+  ```
 - [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) ( Play Store)
+  
 
 ## 🚀 Getting Started
 > **Note:** For complete ROS 2 installation directly on Android device itself, refer to our [Android Installation Guide](https://github.com/botforge-robotics/ros2_android)
@@ -200,13 +209,19 @@ The mobile nodes launch file (`mobile_nodes.launch.py`) starts components relate
 
 ```bash
 # Launch mobile-related nodes
-ros2 launch rio_bringup mobile_nodes.launch.py
+ros2 launch rio_bringup mobile_nodes.launch.py nlp_backend:=ollama
 ```
 
 This launch file includes:
 - **Ollama NLP Node**: Natural language processing for robot interactions
+- **Groq NLP Node**: Natural language processing for robot interactions
 - **WebRTC Node**: Video streaming server (port 8080)
 - **Rosbridge WebSocket**: Enables ROS2-to-WebSocket communication
+
+**Mobile Node Launch Parameters**:
+| Parameter | Description | Default Value | Options |
+|-----------|-------------|---------------|---------|
+| `nlp_backend` | NLP backend | `ollama` | `ollama`, `groq` |
 
 ### 4. PCB Nodes Launch
 The PCB nodes launch file (`pcb_nodes.launch.py`) manages hardware-related components:

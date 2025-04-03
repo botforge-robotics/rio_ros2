@@ -20,7 +20,8 @@ setup(
                     'aiohttp_cors',
                     'aiortc',
                     'opencv-python',
-                    'ollama'],
+                    'ollama',
+                    'groq'],
     zip_safe=True,
     maintainer='chaitu',
     maintainer_email='nagachaitanya948@gmail.com',
@@ -35,6 +36,7 @@ setup(
             'ollama_nlp_node = rio_bringup.ollama_nlp_node:main',
             'mobile_frame = rio_bringup.frame:main',
             'imu_viz_2d = rio_bringup.imu_viz_2d:main',
+            'groq_nlp_node = rio_bringup.groq_nlp_node:main',
         ],
     },
 )
