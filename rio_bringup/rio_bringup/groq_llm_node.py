@@ -125,12 +125,13 @@ class GroqLLMNode(Node):
             if not self.groq_client:
                 raise Exception("Groq client not initialized")
                 
-            # Use the correct Groq API method
+            # Use the correct Groq API method with lower temperature for more direct responses
             chat_completion = self.groq_client.chat.completions.create(
                 model=self.model_name,
                 messages=self._get_truncated_history(),
-                temperature=0.5,
-                max_completion_tokens=1024
+                temperature=0.3,  # Lower temperature for more deterministic responses
+                max_completion_tokens=1024,
+                top_p=0.1  # Lower top_p for more focused responses
             )
             
             # Return the content from the first choice
