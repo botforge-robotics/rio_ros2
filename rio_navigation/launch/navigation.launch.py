@@ -18,13 +18,13 @@ def generate_launch_description():
     params_file_path = PathJoinSubstitution([
         pkg_share_navigation, 'params', LaunchConfiguration('params_file')
     ])
-    map_file_path = PathJoinSubstitution([
-        pkg_share_mapping, 'maps', LaunchConfiguration('map_file')
+    map_name_path = PathJoinSubstitution([
+        pkg_share_mapping, 'maps', LaunchConfiguration('map_name')
     ])
 
     return LaunchDescription([
         DeclareLaunchArgument(
-            'map_file',
+            'map_name',
             default_value='house.yaml',
             description='Full path to map file to load'
         ),
@@ -57,7 +57,7 @@ def generate_launch_description():
                 ])),
             launch_arguments={
                 'params_file': params_file_path,
-                'map': map_file_path,
+                'map': map_name_path,
                 'use_sim_time': LaunchConfiguration('use_sim_time')
             }.items(),
         ),

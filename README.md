@@ -1,4 +1,3 @@
-
 <div align="center">
     <img src="https://img.shields.io/badge/ROS2-Humble-blue" alt="ROS2"/>
     <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status"/>
@@ -19,6 +18,7 @@
 🤖 **RIO Revolution** - Transform your smartphone into a fully-featured ROS2 robot! Utilize a wide array of built-in mobile sensors, including the Accelerometer, Gyro, Compass, GPS, NFC, IR, Ambient Light, Fingerprint Scanner, Cameras, and Mic/Speaker, as ROS2 topics, services, and actions. With the integration of Lidar, we can enable autonomously navigating companion robots that express emotions through animated facial expressions, while also extending functionality with our custom hardware platform.
 
 ## 📑 Table of Contents
+
 - [📑 Table of Contents](#-table-of-contents)
   - [📱 Mobile Core Features](#-mobile-core-features)
   - [🛠️ Hardware Expansion](#️-hardware-expansion)
@@ -124,30 +124,30 @@
 - [ROS 2 Humble](https://docs.ros.org/en/humble/Installation.html) (Recommended)
 - [Ollama Installation](https://ollama.ai/download) (Local LLM Execution)
 - [Groq API Key(optional if ollama is not used)](https://console.groq.com/login) (Cloud LLM Execution) create account in groq and get the api key and set it in the environment variable `GROQ_API_KEY`
-   ```
-   export GROQ_API_KEY=<your_groq_api_key>
-   ```
+  ```
+  export GROQ_API_KEY=<your_groq_api_key>
+  ```
   permanently add the api key to the environment variable `GROQ_API_KEY` in the `~/.bashrc` file
   ```
   echo "export GROQ_API_KEY=<your_groq_api_key>" >> ~/.bashrc
   ```
 - [RIO Companion App](https://play.google.com/store/apps/details?id=com.botforge.rio) ( Play Store)
-  
 
 ## 🚀 Getting Started
+
 > **Note:** For complete ROS 2 installation directly on Android device itself, refer to our [Android Installation Guide](https://github.com/botforge-robotics/ros2_android)
-
-
 
 ### 1. Environment Setup
 
 #### 1.1 ROS2 Setup
+
 ```bash
 # Source ROS installation
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
 #### 1.2 Micro-ROS Setup
+
 ```bash
 # Set up Micro-ROS workspace
 mkdir -p ~/uros_ws/src
@@ -167,6 +167,7 @@ source install/setup.bash
 ```
 
 #### 1.3 RIO Workspace Setup
+
 ```bash
 # Set up RIO workspace
 mkdir -p ~/rio_ws/src
@@ -205,6 +206,7 @@ echo "source ~/rio_ws/install/setup.bash" >> ~/.bashrc
 > ```
 
 ### 3. Mobile Nodes Launch
+
 The mobile nodes launch file (`mobile_nodes.launch.py`) starts components related to the smartphone functionality:
 
 ```bash
@@ -213,6 +215,7 @@ ros2 launch rio_bringup mobile_nodes.launch.py llm_backend:=ollama
 ```
 
 This launch file includes:
+
 - **Ollama LLM Node**: local LLM for robot interactions
 - **Groq LLM Node**: cloud LLM for robot interactions
 - **WebRTC Node**: Video streaming server (port 8080)
@@ -224,6 +227,7 @@ This launch file includes:
 | `llm_backend` | LLM backend | `ollama` | `ollama`, `groq` |
 
 ### 4. PCB Nodes Launch
+
 The PCB nodes launch file (`pcb_nodes.launch.py`) manages hardware-related components:
 
 ```bash
@@ -237,6 +241,7 @@ ros2 launch rio_bringup pcb_nodes.launch.py agent_port:=8888
 | `agent_port` | Micro-ROS agent UDP port | `8888` |
 
 This launch file includes:
+
 - **Micro-ROS Agent**: Handles communication with ESP32
 - **Odometry TF Broadcaster**: Publishes transform data
 - **LIDAR UDP Node**: Manages LIDAR sensor data
@@ -283,6 +288,7 @@ ros2 launch rio_mapping mapping.launch.py \
   use_sim_time:=false \
   use_gui:=false
 ```
+
 > **Note**: Refer mapping params in _rio_mapping/params/mapping_config.yaml_ for any modifications.
 
 **Mapping Parameters**:
@@ -299,6 +305,7 @@ ros2 launch rio_mapping mapping.launch.py \
 # 5.2.1.1 Launch joystick teleop
 ros2 launch rio_teleop teleop_joy.launch.py
 ```
+
 > **Note**: Refer joystick params in _rio_teleop/params/joystick.yaml_ for any modifications.
 
 ##### 7.2.2 RQT Robot Steering GUI
@@ -320,7 +327,7 @@ ros2 run rqt_robot_steering rqt_robot_steering
 
 ```bash
 # 5.3.1 Save created map
-ros2 run nav2_map_server map_saver_cli -f <map_file_name>
+ros2 launch rio_mapping save_map.launch.py map_name:=<map_name_here>
 ```
 
 This saves map files inside `rio_mapping/maps/` folder.
@@ -330,7 +337,7 @@ This saves map files inside `rio_mapping/maps/` folder.
 ```bash
 # 5.4.1 Launch navigation
 ros2 launch rio_navigation navigation.launch.py \
-  map:=house.yaml \
+  map_name:=house.yaml \
   params_file:=nav2_real_params.yaml \
   use_sim_time:=false \
   use_gui:=false
@@ -339,11 +346,10 @@ ros2 launch rio_navigation navigation.launch.py \
 **Navigation Parameters**:
 | Parameter | Description | Default Value | Options |
 |-----------|-------------|---------------|---------|
-| `map` | Map file for navigation | `house.yaml` | YAML map file name |
+| `map_name` | Map file for navigation | `house.yaml` | YAML map file name |
 | `params_file` | Navigation parameters | `nav2_real_params.yaml` | YAML config file name, Available: `nav2_real_params.yaml`/ `nav2_sim_params.yaml` |
 | `use_sim_time` | Use simulation clock | `false` | `true`/`false` |
 | `use_gui` |Open RVIZ2 GUI | `false` | `true`/`false` |
-
 
 ### 8. Visualization Tools
 
@@ -358,8 +364,8 @@ ros2 launch rio_simulation rviz.launch.py \
 |-----------|-------------|---------------|---------|
 | `rviz_config` | RViz config file | `default.rviz` | Any .rviz config |
 
-
 ## 📡 RIO Interfaces
+
 ### 📢 Topics
 
 #### Publishers
@@ -382,6 +388,7 @@ ros2 launch rio_simulation rviz.launch.py \
 - `/speech_recognition/status` (`std_msgs/String`) - Speech Recognition system status ("listening", "done")
 
 #### Subscribers
+
 - `/cmd_vel` (`geometry_msgs/Twist`) - Control robot's linear and angular velocity.
 
 - `/left_led` (`std_msgs/ColorRGBA`) - Control left LED color with RGBA values (RGB: 0-255, Alpha: 0-255)
@@ -397,9 +404,11 @@ ros2 launch rio_simulation rviz.launch.py \
 </details>
 
 ---
+
 ### ⚡ Actions
 
 #### 🔐 Authentication (`/auth`)
+
 - **Type**: `rio_interfaces/action/Auth`
 - **Description**: Authenticate using phone's biometric sensors
 - **Usage**:
@@ -410,6 +419,7 @@ ros2 launch rio_simulation rviz.launch.py \
   ```
 
 #### 🗣️ Text-to-Speech (`/tts`)
+
 - **Type**: `rio_interfaces/action/TTS`
 - **Description**: Converts text to speech with facial expressions
 - **Usage**:
@@ -420,12 +430,15 @@ ros2 launch rio_simulation rviz.launch.py \
   ```
 
 ---
+
 ### 🔧 Services
 
 #### 📸 Camera Control (`/enable_camera`)
+
 - **Type**: `rio_interfaces/srv/Camera`
 - **Description**: Control phone's front/back cameras
 - **Usage**:
+
   ```bash
   # Enable front camera
   ros2 service call /enable_camera rio_interfaces/srv/Camera \
@@ -439,6 +452,7 @@ ros2 launch rio_simulation rviz.launch.py \
   ros2 service call /enable_camera rio_interfaces/srv/Camera \
     "{direction: 0, status: false}"
   ```
+
 - **Parameters**:
   - `direction`: 0 (front) or 1 (back)
   - `status`: true (enable) or false (disable)
@@ -446,6 +460,7 @@ ros2 launch rio_simulation rviz.launch.py \
 #### 😊 Expression Management
 
 ##### Get Expression Status (`/expression_status`)
+
 - **Type**: `rio_interfaces/srv/GetExpression`
 - **Description**: Get current facial expression
 - **Usage**:
@@ -455,6 +470,7 @@ ros2 launch rio_simulation rviz.launch.py \
   ```
 
 ##### Set Expression (`/set_expression`)
+
 - **Type**: `rio_interfaces/srv/Expression`
 - **Description**: Set robot's facial expression
 - **Available Expressions**:
@@ -482,12 +498,12 @@ ros2 launch rio_simulation rviz.launch.py \
 
 ## 🔗 Reference Links
 
-- [RIO Hardware](https://github.com/botforge-robotics/rio_hardware) - Hardware design files, BOM and assembly instructions 
+- [RIO Hardware](https://github.com/botforge-robotics/rio_hardware) - Hardware design files, BOM and assembly instructions
 - [RIO Firmware](https://github.com/botforge-robotics/rio_firmware) - Micro-ROS firmware for the RIO controller board
 - [ROS2 Android](https://github.com/botforge-robotics/ros2_android) - Run ROS2 Humble directly on Android using Termux
 
-
 ## Future Scope
+
 - Implement existing mobile sensors to enhance RIO's capabilities, including:
   - **IR Sensor**: Utilize for remote controlling appliances.
   - **Touch Gestures**: Implement tap and swipe gestures for user interaction.
@@ -497,14 +513,15 @@ ros2 launch rio_simulation rviz.launch.py \
   - **And many more...**
 
 ## 🤝 Contributing
+
 1. Fork the Repository
 2. Create Feature Branch
 3. Commit Changes
 4. Push to Branch
 5. Open Pull Request
 
-
 ## 📄 License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
